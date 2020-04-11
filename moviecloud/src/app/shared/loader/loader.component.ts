@@ -8,11 +8,12 @@ import { Component, OnInit } from '@angular/core';
 export class LoaderComponent implements OnInit {
   loaderContainer: HTMLElement;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
-    // Sets the opacity to 0 100ms after component mounted and removes loader from DOM 2 seconds after
     this.loaderContainer = document.querySelector('.loader-container');
+
+    // Sets the opacity to 0 100ms after component mounted and removes loader from DOM 2 seconds after
     setTimeout(() => {
 
       this.loaderContainer.style.transition = 'opacity 5s';

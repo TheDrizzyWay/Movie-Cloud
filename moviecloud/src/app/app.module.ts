@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +12,7 @@ import { UserLoginComponent } from './components/user-login/user-login.component
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { LoaderComponent } from './shared/loader/loader.component';
 import { MainFooterComponent } from './components/main-footer/main-footer.component';
+import { MainNavComponent } from './components/main-nav/main-nav.component';
 
 @NgModule({
   declarations: [
@@ -22,11 +24,13 @@ import { MainFooterComponent } from './components/main-footer/main-footer.compon
     UserLoginComponent,
     UserProfileComponent,
     LoaderComponent,
-    MainFooterComponent
+    MainFooterComponent,
+    MainNavComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
