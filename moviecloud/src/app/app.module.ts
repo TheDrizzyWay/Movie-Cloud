@@ -9,6 +9,8 @@ import { SearchResultsComponent } from './components/search-results/search-resul
 import { DiscoverComponent } from './components/discover/discover.component';
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { LoaderComponent } from './shared/loader/loader.component';
+import { MainFooterComponent } from './components/main-footer/main-footer.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,9 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     SearchResultsComponent,
     DiscoverComponent,
     UserLoginComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    LoaderComponent,
+    MainFooterComponent
   ],
   imports: [
     BrowserModule,
