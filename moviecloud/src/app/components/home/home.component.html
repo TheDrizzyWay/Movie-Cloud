@@ -1,5 +1,12 @@
 <div class="home-container">
     <app-main-nav></app-main-nav>
+
+    <div class="item-controller">
+        <button class="item-controller__switch wow fadeInDown" data-wow-delay=".5s" data-wow-duration="1s" (click)="movieToggle()">Movies</button>
+        <button class="item-controller__switch wow fadeInDown" data-wow-delay=".5s" data-wow-duration="1s" (click)="tvToggle()">TV Shows</button>
+    </div>
+
     <app-main-footer></app-main-footer>
+
     <app-loader></app-loader>
 </div>
