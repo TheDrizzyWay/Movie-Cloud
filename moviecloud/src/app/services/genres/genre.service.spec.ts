@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GenericService } from './generic.service';
+import { GenreService } from './genre.service';
 
-describe('GenericService', () => {
+describe('GenreService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: GenericService = TestBed.get(GenericService);
+    const service: GenreService = TestBed.get(GenreService);
     expect(service).toBeTruthy();
   });
 });

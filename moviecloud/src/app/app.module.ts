@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -13,6 +14,7 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { LoaderComponent } from './shared/loader/loader.component';
 import { MainFooterComponent } from './components/main-footer/main-footer.component';
 import { MainNavComponent } from './components/main-nav/main-nav.component';
+import { HomeHeaderComponent } from './components/home-header/home-header.component';
 
 @NgModule({
   declarations: [
@@ -25,12 +27,14 @@ import { MainNavComponent } from './components/main-nav/main-nav.component';
     UserProfileComponent,
     LoaderComponent,
     MainFooterComponent,
-    MainNavComponent
+    MainNavComponent,
+    HomeHeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
