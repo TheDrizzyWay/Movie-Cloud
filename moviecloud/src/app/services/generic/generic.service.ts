@@ -11,27 +11,29 @@ import { environment } from '../../../environments/environment';
 })
 export class GenericService<T extends Resource> {
   apiKey: string;
-  url: string;
+  baseUrl: string;
+  fullUrl: string;
 
   constructor(
     private http: HttpClient,
     private endpoint: string,
   ) { 
-    this.url = "https://api.themoviedb.org/3";
+    this.baseUrl = "https://api.themoviedb.org/3";
     this.apiKey = environment.apiKey;
+    this.fullUrl = `${this.baseUrl}/${this.endpoint}?api_key=${this.apiKey}&language=en-US&page=1`
   }
 
-    public create(item: T): Observable<T> {
-      return this.http.post<any>(`${this.url}/${this.endpoint}`, item);
-    }
+    // public create(item: T): Observable<T> {
+    //   return this.http.post<any>(`${this.fullUrl}/`, item);
+    // }
 
     public get(): Observable<T> {
-      return this.http.get<any>(`${this.url}/${this.endpoint}?api_key=${this.apiKey}&language=en-US`)
+      return this.http.get<any>(this.fullUrl)
       .pipe(catchError(err => this.handleError(err)));
     }
 
     public getOne(id: number): Observable<T> {
-      return this.http.get<any>(`${this.url}/${this.endpoint}/${id}?api_key=${this.apiKey}&language=en-US`);
+      return this.http.get<any>(this.fullUrl);
     }
 
     private handleError(err: any): Observable<any> {

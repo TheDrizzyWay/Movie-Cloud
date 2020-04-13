@@ -1,61 +1,50 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ItemTypeService } from '@app/services/item-type/item-type.service';
 import { GlobalService } from '@app/services/global/global.service';
-import { Genre } from '@app/models/Genre';
-import { Subscription } from 'rxjs';
+import { UpcomingService } from '@app/services/movies/movie.service';
+import { TodayService } from '@app/services/tv/tv.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent implements OnInit {
   itemType: string;
-  movieSubscription: Subscription;
-  tvSubscription: Subscription;
-  movieGenres: Genre[];
-  tvGenres: Genre[];
 
   constructor(
     private itemService: ItemTypeService,
-    private globalService: GlobalService
+    private globalService: GlobalService,
+    private upcoming: UpcomingService,
+    private today: TodayService
     ) { }
 
   ngOnInit() {
     this.itemType = this.itemService.getType();
 
-    this.movieSubscription = this.globalService.getMovieGenres().subscribe(res => {
-        this.movieGenres = res.genres ? res.genres : [];
+    this.globalService.getItemType().subscribe(res => {
+      if (res) {
+        this.itemType = res;
+      }
     });
-
-    this.tvSubscription = this.globalService.getTvGenres().subscribe(res => {
-      this.tvGenres = res.genres ? res.genres : [];
-    })
 
     this.itemType == 'MOVIE' ? this.fetchContent('MOVIE') : this.fetchContent('TV');
   }
 
   toggleItemType(type: string): void {
-    this.itemType = this.itemService.setType(type);
+    this.globalService.sendItemType(type);
   }
 
-  movieToggle() {
-    this.toggleItemType('MOVIE');
-    this.fetchContent('MOVIE');
-  }
-
-  tvToggle() {
-    this.toggleItemType('TV');
-    this.fetchContent('TV');
+  itemToggle(type: string) {
+    this.toggleItemType(type);
+    this.fetchContent(type);
   }
 
   fetchContent(type: string) {
-
-  }
-
-  ngOnDestroy() {
-    // unsubscribe to ensure no memory leaks
-    this.movieSubscription.unsubscribe();
+    if(type == 'MOVIE') {
+      
+    }
+    
   }
 
 }
