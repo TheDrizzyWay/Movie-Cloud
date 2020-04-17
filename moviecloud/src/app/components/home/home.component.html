@@ -1,7 +1,11 @@
 <div class="home-container">
     <app-main-nav></app-main-nav>
 
-    <app-home-header></app-home-header>
+    <app-home-header
+    [itemType]="itemType"
+    [genres]="itemType == 'MOVIE' ? movieGenres : tvGenres"
+    [items]="itemType == 'MOVIE' ? nowPlayingList : todayTvList"
+    ></app-home-header>
 
     <div class="item-controller">
         <button class="item-controller__switch wow fadeInDown" data-wow-delay=".5s" data-wow-duration="1s" (click)="itemToggle('MOVIE')">Movies</button>

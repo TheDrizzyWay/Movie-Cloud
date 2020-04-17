@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { GenericService } from '../generic/generic.service';
 import { HttpClient } from '@angular/common/http';
-import { TodayTv } from '@app/models/TodayTv';
+import { TodayTvInterface } from '@app/models/TodayTv';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TodayService extends GenericService<TodayTv> {
+export class TodayService extends GenericService<TodayTvInterface> {
 
   constructor(http: HttpClient) { 
     super(http, 'tv/airing_today');

@@ -2,9 +2,6 @@ import { Injectable } from '@angular/core';
 import { Subject, Observable } from 'rxjs';
 import { MovieGenreService, TvGenreService } from '../genres/genre.service';
 import { Genre } from '@app/models/Genre';
-import { ItemTypeService } from '../item-type/item-type.service';
-import { UpcomingService, PopularService, NowPlayingService, TopRatedService } from '../movies/movie.service';
-import { UpcomingMovie } from '@app/models/UpcomingMovie';
 
 @Injectable({
   providedIn: 'root'
@@ -12,49 +9,36 @@ import { UpcomingMovie } from '@app/models/UpcomingMovie';
 export class GlobalService {
   private movieGenreSubject: Subject<Genre>;
   private tvGenreSubject: Subject<Genre>;
-  private itemTypeSubject: Subject<string>;
-  private upcomingMovieSubject: Subject<UpcomingMovie>;
+  private serviceConstants: Object;
+  private subjectConstants: Object;
 
   constructor(
     private movieGenre: MovieGenreService,
     private tvGenre: TvGenreService,
-    private typeService: ItemTypeService,
-    private upcoming: UpcomingService,
-    private popular: PopularService,
-    private nowPlaying: NowPlayingService,
-    private topRated: TopRatedService
     ) {
       this.movieGenreSubject = new Subject<Genre>();
       this.tvGenreSubject = new Subject<Genre>();
-      this.itemTypeSubject = new Subject<string>();
-      this.upcomingMovieSubject = new Subject<UpcomingMovie>();
-     }
 
-  sendItemType(type: string) {
-    this.itemTypeSubject.next(this.typeService.setType(type));
+      this.serviceConstants = Object.freeze({ 
+        movie_genre: this.movieGenre,
+        tv_genre: this.tvGenre
+       });
+
+      this.subjectConstants = Object.freeze({ 
+        movie_genre: this.movieGenreSubject,
+        tv_genre: this.tvGenreSubject
+       });
+    }
+
+  sendEntity(entity: string) {
+    const entityService = this.serviceConstants[entity];
+    const entitySubject = this.subjectConstants[entity];
+
+    entityService.get().subscribe(res => entitySubject.next(res));
   }
 
-  sendMovieGenres() {
-    this.movieGenre.get().subscribe(res => this.movieGenreSubject.next(res));
+  getEntity(entity: string): Observable<any> {
+    return this.subjectConstants[entity].asObservable();
   }
 
-  sendTvGenres() {
-    this.tvGenre.get().subscribe(res => this.tvGenreSubject.next(res));
-  }
-
-  sendUpcomingMovies() {
-    this.upcoming.get().subscribe(res => this.upcomingMovieSubject.next(res));
-  }
-
-  getItemType(): Observable<string> {
-    return this.itemTypeSubject.asObservable();
-  }
-
-  getMovieGenres(): Observable<any> {
-    return this.movieGenreSubject.asObservable();
-  }
-
-  getTvGenres(): Observable<any> {
-    return this.tvGenreSubject.asObservable();
-  }
 }

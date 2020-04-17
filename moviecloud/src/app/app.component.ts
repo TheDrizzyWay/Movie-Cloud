@@ -12,7 +12,7 @@ export class AppComponent implements OnInit {
   constructor(private globalService: GlobalService) {}
 
   ngOnInit() {
-    this.globalService.sendMovieGenres();
-    this.globalService.sendTvGenres();
+    this.globalService.sendEntity('movie_genre');
+    this.globalService.sendEntity('tv_genre');
   }
 }

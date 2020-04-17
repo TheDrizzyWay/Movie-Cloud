@@ -1,5 +1,8 @@
 import { Resource } from './Resource';
 
+export interface TodayTvInterface {
+    results: TodayTv[];
+}
 export interface TodayTv extends Resource {
     original_name: string;
     genre_ids: number[];

@@ -1,3 +1,3 @@
 export interface Resource {
-    id: number;
+    // common properties go here
 }
