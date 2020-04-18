@@ -1,1 +1,20 @@
-<p>home-header works!</p>
+<div *ngIf="items.length" class="swiper-container" [swiper]="config">
+
+    <div class="swiper-wrapper">
+        <a
+            *ngFor="let item of slides;"
+            [routerLink]="['/details', itemType.toLowerCase(), item.id]"
+            class="swiper-slide"
+            [ngStyle]="styleLink(item.backdrop_path)"
+        >
+            <div>
+            <p class="swiper-slide__category">{{ 'Latest' | uppercase }}</p>
+            <h2 class="swiper-slide__title">{{ item.title || item.name }}</h2>
+            <p class="swiper-slide__item-duration">{{ handleGetGenre(item.genre_ids) }} | {{ item.vote_average }} Rating</p>
+            </div>
+        </a>
+    </div>
+
+    <div class="home-swiper-pagination"></div>
+
+</div>
