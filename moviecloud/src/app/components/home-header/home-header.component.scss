@@ -1,7 +1,7 @@
 @import '../../../assets/styles/variables';
 @import '../../../assets/styles/carousel';
 
-.swiper-container {
+.home-swiper-container {
   overflow: hidden;
 
   .swiper-pagination-progressbar-fill {
@@ -62,7 +62,7 @@
 }
 
 @media only screen and (min-width: 600px) {
-  .swiper-container {
+  .home-swiper-container {
 
     .swiper-wrapper {
 
@@ -74,7 +74,7 @@
 }
 
 @media only screen and (min-width: 900px) {
-  .swiper-container {
+  .home-swiper-container {
     background-color: $primary-font-color;;
     padding-top: 4.9rem;
 
@@ -86,7 +86,7 @@
 }
 
 @media only screen and (min-width: 1250px) {
-  .swiper-container {
+  .home-swiper-container {
 
     .swiper-wrapper {
       div {

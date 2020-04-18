@@ -16,6 +16,7 @@ import { LoaderComponent } from './shared/loader/loader.component';
 import { MainFooterComponent } from './components/main-footer/main-footer.component';
 import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { HomeHeaderComponent } from './components/home-header/home-header.component';
+import { ItemCarouselComponent } from './components/item-carousel/item-carousel.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { HomeHeaderComponent } from './components/home-header/home-header.compon
     LoaderComponent,
     MainFooterComponent,
     MainNavComponent,
-    HomeHeaderComponent
+    HomeHeaderComponent,
+    ItemCarouselComponent
   ],
   imports: [
     BrowserModule,

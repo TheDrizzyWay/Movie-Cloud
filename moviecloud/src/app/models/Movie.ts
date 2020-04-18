@@ -1,10 +1,10 @@
 import { Resource } from './Resource';
 
-export interface UpcomingMovieInterface extends Resource {
-    results: UpcomingMovie[];
+export interface MovieInterface extends Resource {
+    results: Movie[];
 }
 
-export interface UpcomingMovie {
+export interface Movie {
     popularity: number;
     vote_count: number;
     video: boolean;

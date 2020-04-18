@@ -1,0 +1,25 @@
+<div class="carousel-container wow fadeIn" data-wow-duration="3s">
+
+    <div *ngIf="items.length" class="swiper-container" [swiper]="config">
+      <h2 class="swiper-container__title">{{ title }}</h2>
+
+      <div class="swiper-wrapper">
+          <div *ngFor="let item of items" class="swiper-slide">
+          <a [routerLink]="['/details', itemType.toLowerCase(), item.id]">
+              <img class="swiper-slide__image" src="{{ tmdb.secure_base_url }}{{ tmdb.poster_sizes[1] }}{{ item.poster_path}}" alt={movie.title} />
+              <h3 class="swiper-slide__title">{{ item.title }}</h3>
+              <p className="swiper-slide__genres">{{ handleGenres(item.genre_ids).name1 }}{{ handleGenres(item.genre_ids).name2 }}</p>
+              <p class="swiper-slide-rating">
+                <svg class="swiper-slide-rating__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 372.686L380.83 448l-33.021-142.066L458 210.409l-145.267-12.475L256 64l-56.743 133.934L54 210.409l110.192 95.525L131.161 448z"/></svg>
+                {{ item.vote_average }}
+              </p>
+            </a>
+          </div>
+      </div>
+
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+  </div>
+
+  <hr class="carousel-container__separator" />
+</div>

@@ -2,17 +2,36 @@
     <app-main-nav></app-main-nav>
 
     <app-home-header
-    [itemType]="itemType"
-    [genres]="itemType == 'MOVIE' ? movieGenres : tvGenres"
-    [items]="itemType == 'MOVIE' ? nowPlayingList : todayTvList"
-    ></app-home-header>
+        [itemType]="itemType"
+        [genres]="itemType == 'MOVIE' ? movieGenres : tvGenres"
+        [items]="itemType == 'MOVIE' ? nowPlayingList : todayTvList"
+    >
+    </app-home-header>
 
     <div class="item-controller">
         <button class="item-controller__switch wow fadeInDown" data-wow-delay=".5s" data-wow-duration="1s" (click)="itemToggle('MOVIE')">Movies</button>
         <button class="item-controller__switch wow fadeInDown" data-wow-delay=".5s" data-wow-duration="1s" (click)="itemToggle('TV')">TV Shows</button>
     </div>
 
+    <div className="home-container-main">
+        <div *ngIf="itemType == 'MOVIE';else tvTemplate">
+            <app-item-carousel title="Upcoming" [itemType]="'MOVIE'" [genres]="movieGenres" [items]="upcomingList"></app-item-carousel>
+            <app-item-carousel title="Popular" [itemType]="'MOVIE'" [genres]="movieGenres" [items]="popularList"></app-item-carousel>
+            <app-item-carousel title="Now Playing" [itemType]="'MOVIE'" [genres]="movieGenres" [items]="nowPlayingList"></app-item-carousel>
+            <app-item-carousel title="Top Rated" [itemType]="'MOVIE'" [genres]="movieGenres" [items]="topRatedList"></app-item-carousel>
+        </div>
+    </div>
+
     <app-main-footer></app-main-footer>
 
     <app-loader></app-loader>
 </div>
+
+<ng-template #tvTemplate>
+    <div>
+        <app-item-carousel></app-item-carousel>
+        <app-item-carousel></app-item-carousel>
+        <app-item-carousel></app-item-carousel>
+        <app-item-carousel></app-item-carousel>
+    </div>
+</ng-template>

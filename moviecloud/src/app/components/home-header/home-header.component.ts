@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges } from '@angular/core';
 import { SwiperConfigInterface } from 'ngx-swiper-wrapper';
 import { Genre } from '@app/models/Genre';
-import { UpcomingMovie } from '@app/models/UpcomingMovie';
+import { Movie } from '@app/models/Movie';
 import { tmdbConfig } from '@app/utils/constants';
 
 @Component({
@@ -12,23 +12,26 @@ import { tmdbConfig } from '@app/utils/constants';
 export class HomeHeaderComponent implements OnChanges {
   @Input() itemType: string;
   @Input() genres: Genre[];
-  @Input() items: UpcomingMovie[];
+  @Input() items: Movie[];
 
   config: SwiperConfigInterface;
   linkStyles: object;
-  slides: UpcomingMovie[];
+  slides: Movie[];
   
   constructor() { 
     this.config = {
       slidesPerView: 1,
       spaceBetween: 0,
       observer: true,
-
-      autoplay: 8000,
-
-      pagination: '.home-swiper-pagination',
-      paginationType: 'progressbar',
-
+      autoplay: {
+        delay: 6000,
+        disableOnInteraction: false
+      },
+      navigation: true,
+      pagination: {
+        el: '.home-swiper-pagination',
+        type: 'progressbar'
+      },
       slideNextClass: '.home-swiper-button-next',
       slidePrevClass: '.home-swiper-button-prev',
     };
@@ -54,8 +57,8 @@ export class HomeHeaderComponent implements OnChanges {
     return mainGenre;
   }
 
-  selectSlides(items: UpcomingMovie[]) {
-    let slidesArray: UpcomingMovie[] = [];
+  selectSlides(items: Movie[]) {
+    let slidesArray: Movie[] = [];
     if(!items.length) {
       return slidesArray;
     } else {

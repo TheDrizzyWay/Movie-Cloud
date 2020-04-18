@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { GenericService } from '../generic/generic.service';
 import { HttpClient } from '@angular/common/http';
-import { UpcomingMovieInterface } from '@app/models/UpcomingMovie';
+import { MovieInterface } from '@app/models/Movie';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UpcomingService extends GenericService<UpcomingMovieInterface> {
+export class UpcomingService extends GenericService<MovieInterface> {
 
   constructor(http: HttpClient) { 
     super(http, 'movie/upcoming');
@@ -16,7 +16,7 @@ export class UpcomingService extends GenericService<UpcomingMovieInterface> {
 @Injectable({
   providedIn: 'root'
 })
-export class PopularService extends GenericService<any> {
+export class PopularService extends GenericService<MovieInterface> {
 
   constructor(http: HttpClient) { 
     super(http, 'movie/popular');
@@ -26,7 +26,7 @@ export class PopularService extends GenericService<any> {
 @Injectable({
   providedIn: 'root'
 })
-export class NowPlayingService extends GenericService<any> {
+export class NowPlayingService extends GenericService<MovieInterface> {
 
   constructor(http: HttpClient) { 
     super(http, 'movie/now_playing');
@@ -36,7 +36,7 @@ export class NowPlayingService extends GenericService<any> {
 @Injectable({
   providedIn: 'root'
 })
-export class TopRatedService extends GenericService<any> {
+export class TopRatedService extends GenericService<MovieInterface> {
 
   constructor(http: HttpClient) { 
     super(http, 'movie/top_rated');
