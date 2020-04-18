@@ -28,6 +28,7 @@
     &__button {
       background: none;
       border: none;
+      margin-top: 15%;
       cursor: pointer;
 
       svg {
@@ -137,6 +138,21 @@
         bottom: -100px;
       }
     }
+}
+
+@media only screen and (min-width: 0px) {
+  .main-nav {
+
+    &-top-section {
+
+      .main-nav-search-form {
+
+        &__button {
+          left: 129px;
+        }
+      }
+    }
+  }
 }
 
 @media only screen and (min-width: 500px) {

@@ -22,7 +22,7 @@ export class ItemCarouselComponent {
     this.config = {
       slidesPerView: 7,
       loop: false,
-      spaceBetween: 14,
+      spaceBetween: 13,
       observer: true,
       breakpoints: {
         1145: {

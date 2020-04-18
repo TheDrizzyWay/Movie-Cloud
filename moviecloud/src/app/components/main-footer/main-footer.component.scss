@@ -18,7 +18,7 @@
       // main-footer-top-header__title
       &__title {
         font-family: $tertiary-font;
-        letter-spacing: .4rem;
+        letter-spacing: .25rem;
         text-transform: uppercase;
       }
 
@@ -111,6 +111,7 @@
     }
 
     &-bottom {
+      margin-bottom: 2.5%;
 
       &-section-2 {
 
