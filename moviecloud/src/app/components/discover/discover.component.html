@@ -1,1 +1,35 @@
-<p>discover works!</p>
+<div class="discover">
+    <app-main-nav></app-main-nav>
+
+    <header class="discover-header">
+        <h1 class="discover-header__title wow fadeIn" data-wow-delay="1s" data-wow-duration="3s">Discover</h1>
+        <hr class="discover-header__separator" />
+
+        <form class="discover-header-form">
+
+            <div class="discover-header-form-container">
+              <select class="discover-header-form-container-select wow fadeInUp" data-wow-delay=".6s" data-wow-duration="3s" (change)="sortOption($event.target.value)" name="sort_by">
+                <option class="discover-header-form-container-select__option" value="popularity.desc">Popularity Descending</option>
+                <option class="discover-header-form-container-select__option" value="popularity.asc">Popularity Ascending</option>
+                <option class="discover-header-form-container-select__option" value="release_date.desc">Release Date Descending</option>
+                <option class="discover-header-form-container-select__option" value="release_date.asc">Release Date Ascending</option>
+                <option class="discover-header-form-container-select__option" value="revenue.desc">Revenue Descending</option>
+                <option class="discover-header-form-container-select__option" value="revenue.asc">Revenue Ascending</option>
+                <option class="discover-header-form-container-select__option" value="vote_average.desc">Vote Average Descending</option>
+                <option class="discover-header-form-container-select__option" value="vote_average.asc">Vote Average Ascending</option>
+              </select>
+
+              <input class="discover-header-form-container-input wow fadeInUp" data-wow-delay=".8s" data-wow-duration="3s" [(ngModel)]="requestOptions.voteAverage" type="number" name="vote_average" placeholder="Vote Average" />
+              <input class="discover-header-form-container-input wow fadeInUp" data-wow-delay="1s" data-wow-duration="3s" [(ngModel)]="requestOptions.withPeople" type="text" name="with_People" placeholder="People involved" />
+              <input class="discover-header-form-container-input wow fadeInUp" data-wow-delay="1.2s" data-wow-duration="3s" [(ngModel)]="requestOptions.withGenres" type="text" name="with_genres" placeholder="Genres" />
+              <input class="discover-header-form-container-input wow fadeInUp" data-wow-delay="1.4s" data-wow-duration="3s" [(ngModel)]="requestOptions.withKeywords" type="text" name="with_keywords" placeholder="Keywords" />
+              <input class="discover-header-form-container-input wow fadeInUp" data-wow-delay="1.6s" data-wow-duration="3s" [(ngModel)]="requestOptions.year" type="number" name="year" placeholder="Year" />
+            </div>
+
+            <button class="discover-header-form__button" (click)="handleGetDiscover()">
+                Search
+            </button>
+        </form>
+
+    </header>
+</div>

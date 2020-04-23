@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DiscoverService } from '@app/services/discover/discover.service';
+import { Movie } from '@app/models/Movie';
+import { DiscoverOptions } from '@app/models/DiscoverOptions';
 
 @Component({
   selector: 'app-discover',
@@ -8,10 +10,12 @@ import { DiscoverService } from '@app/services/discover/discover.service';
 })
 export class DiscoverComponent implements OnInit {
   page: number;
-  requestOptions: object;
+  requestOptions: DiscoverOptions;
+  items: Movie[];
 
   constructor(private discover: DiscoverService) { 
     this.page = 1;
+    this.items = [];
     this.requestOptions = {
       sortBy: 'popularity.desc',
       voteAverage: null,
@@ -26,8 +30,22 @@ export class DiscoverComponent implements OnInit {
     this.handleGetDiscover(this.page);
   }
 
-  handleGetDiscover(page: number) {
-    this.discover.get(page, this.requestOptions).subscribe();
+  handleGetDiscover(page: number = 1): void {
+    this.discover.get(page, this.requestOptions).subscribe(res => this.items = res);
+  }
+
+  sortOption(selected: string) {
+    this.requestOptions.sortBy = selected;
+  }
+
+  getNextPage() {
+    this.page = this.page + 1;
+    this.handleGetDiscover(this.page);
+  }
+
+  getPreviousPage() {
+    this.page = this.page - 1;
+    this.handleGetDiscover(this.page);
   }
 
 }
