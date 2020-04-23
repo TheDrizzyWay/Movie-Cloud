@@ -192,6 +192,10 @@
         }
       }
 
+      &:disabled {
+        cursor: not-allowed;
+      }
+
       svg {
         fill: $primary-font-color;
         margin-top: -2px;

@@ -32,4 +32,30 @@
         </form>
 
     </header>
+
+    <main *ngIf="items.length;else noResults" class="discover-main">
+
+          <a *ngFor="let item of items" [routerLink]="['/details', item.name ? 'tv' : 'movie', item.id]">
+            <div class="discover-main-item">
+              <img class="discover-main-item__image" src="{{ tmdb.secure_base_url }}{{ tmdb.poster_sizes[0] }}{{ item.poster_path }}" alt="{{ item.name || item.title }}" />
+              <h3 class="discover-main-item__title">{{ item.title || item.name }}</h3>
+              <p class="discover-main-item-rating">
+                <svg class="discover-main-item-rating__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 372.686L380.83 448l-33.021-142.066L458 210.409l-145.267-12.475L256 64l-56.743 133.934L54 210.409l110.192 95.525L131.161 448z"/></svg>
+                {{ item.vote_average }}
+              </p>
+            </div>
+        </a>
+
+    </main>
+
+    <div class="discover-pagination">
+        <button class="discover-pagination__button wow fadeIn" data-wow-delay=".5s" data-wow-duration="3s" (click)="getPreviousPage()" [disabled]="page == 1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M320 128L192 256l128 128z"/></svg>Previous</button>
+        <button class="discover-pagination__button wow fadeIn" data-wow-delay=".5s" data-wow-duration="3s" (click)="getNextPage()">Next<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M192 128l128 128-128 128z"/></svg></button>
+    </div>
+
+    <app-loader></app-loader>
 </div>
+
+<ng-template #noResults>
+    <h2 class="discover-warning">No results found</h2>
+</ng-template>

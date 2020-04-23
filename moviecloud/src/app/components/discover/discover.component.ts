@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { DiscoverService } from '@app/services/discover/discover.service';
 import { Movie } from '@app/models/Movie';
 import { DiscoverOptions } from '@app/models/DiscoverOptions';
+import { tmdbConfig } from '@app/utils/constants';
 
 @Component({
   selector: 'app-discover',
@@ -12,6 +13,7 @@ export class DiscoverComponent implements OnInit {
   page: number;
   requestOptions: DiscoverOptions;
   items: Movie[];
+  tmdb: object = tmdbConfig;
 
   constructor(private discover: DiscoverService) { 
     this.page = 1;
