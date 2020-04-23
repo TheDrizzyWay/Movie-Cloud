@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { GenericService } from '../generic/generic.service';
 import { HttpClient } from '@angular/common/http';
-import { TodayTvInterface } from '@app/models/TodayTv';
+import { TvShowInterface } from '@app/models/TvShow';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TodayService extends GenericService<TodayTvInterface> {
+export class TodayService extends GenericService<TvShowInterface> {
 
   constructor(http: HttpClient) { 
     super(http, 'tv/airing_today');
@@ -16,7 +16,7 @@ export class TodayService extends GenericService<TodayTvInterface> {
 @Injectable({
   providedIn: 'root'
 })
-export class PopularService extends GenericService<any> {
+export class PopularTvService extends GenericService<TvShowInterface> {
 
   constructor(http: HttpClient) { 
     super(http, 'tv/popular');
@@ -26,7 +26,7 @@ export class PopularService extends GenericService<any> {
 @Injectable({
   providedIn: 'root'
 })
-export class OnAirService extends GenericService<any> {
+export class OnAirService extends GenericService<TvShowInterface> {
 
   constructor(http: HttpClient) { 
     super(http, 'tv/on_the_air');
@@ -36,7 +36,7 @@ export class OnAirService extends GenericService<any> {
 @Injectable({
   providedIn: 'root'
 })
-export class TopRatedService extends GenericService<any> {
+export class TopRatedTvService extends GenericService<TvShowInterface> {
 
   constructor(http: HttpClient) { 
     super(http, 'tv/top_rated');

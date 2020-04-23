@@ -1,9 +1,9 @@
 import { Resource } from './Resource';
 
-export interface TodayTvInterface {
-    results: TodayTv[];
+export interface TvShowInterface {
+    results: TvShow[];
 }
-export interface TodayTv extends Resource {
+export interface TvShow extends Resource {
     original_name: string;
     genre_ids: number[];
     name: string;

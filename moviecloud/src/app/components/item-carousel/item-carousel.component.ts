@@ -3,6 +3,7 @@ import { Genre } from '@app/models/Genre';
 import { Movie } from '@app/models/Movie';
 import { SwiperConfigInterface  } from 'ngx-swiper-wrapper';
 import { tmdbConfig } from '@app/utils/constants';
+import { TvShow } from '@app/models/TvShow';
 
 @Component({
   selector: 'app-item-carousel',
@@ -12,7 +13,7 @@ import { tmdbConfig } from '@app/utils/constants';
 export class ItemCarouselComponent {
   @Input() itemType: string;
   @Input() genres: Genre[];
-  @Input() items: Movie[];
+  @Input() items: Movie[] | TvShow[];
   @Input() title: string;
 
   config: SwiperConfigInterface;

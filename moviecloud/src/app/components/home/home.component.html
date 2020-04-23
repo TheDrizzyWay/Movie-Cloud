@@ -29,9 +29,9 @@
 
 <ng-template #tvTemplate>
     <div>
-        <app-item-carousel></app-item-carousel>
-        <app-item-carousel></app-item-carousel>
-        <app-item-carousel></app-item-carousel>
-        <app-item-carousel></app-item-carousel>
+        <app-item-carousel title="Airing Today" [itemType]="'TV'" [genres]="tvGenres" [items]="todayTvList"></app-item-carousel>
+        <app-item-carousel title="Popular" [itemType]="'TV'" [genres]="tvGenres" [items]="popularTvList"></app-item-carousel>
+        <app-item-carousel title="On The Air" [itemType]="'TV'" [genres]="tvGenres" [items]="onAirList"></app-item-carousel>
+        <app-item-carousel title="Top Rated" [itemType]="'TV'" [genres]="tvGenres" [items]="topTvList"></app-item-carousel>
     </div>
 </ng-template>

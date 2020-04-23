@@ -5,8 +5,8 @@ import { GlobalService } from '@app/services/global/global.service';
 import { Genre } from '@app/models/Genre';
 import { NowPlayingService, UpcomingService, PopularService, TopRatedService } from '@app/services/movies/movie.service';
 import { Movie } from '@app/models/Movie';
-import { TodayService } from '@app/services/tv/tv.service';
-import { TodayTv } from '@app/models/TodayTv';
+import { TodayService, PopularTvService, OnAirService, TopRatedTvService } from '@app/services/tv/tv.service';
+import { TvShow } from '@app/models/TvShow';
 
 @Component({
   selector: 'app-home',
@@ -23,7 +23,10 @@ export class HomeComponent implements OnInit {
   upcomingList: Movie[];
   popularList: Movie[];
   topRatedList: Movie[];
-  todayTvList: TodayTv[];
+  todayTvList: TvShow[];
+  popularTvList: TvShow[];
+  onAirList: TvShow[];
+  topTvList: TvShow[];
 
   constructor(
     private itemService: ItemTypeService,
@@ -32,13 +35,19 @@ export class HomeComponent implements OnInit {
     private upcoming: UpcomingService,
     private popular: PopularService,
     private topRated: TopRatedService,
-    private todayTv: TodayService
+    private todayTv: TodayService,
+    private popularTv: PopularTvService,
+    private onAir: OnAirService,
+    private topTv: TopRatedTvService
     ) { 
       this.nowPlayingList = [];
       this.upcomingList = [];
       this.popularList = [];
       this.topRatedList = [];
       this.todayTvList = [];
+      this.popularTvList = [];
+      this.onAirList = [];
+      this.topTvList = [];
     }
 
   ngOnInit() {
@@ -66,6 +75,9 @@ export class HomeComponent implements OnInit {
     this.popular.get().subscribe(res => this.popularList = res.results);
     this.topRated.get().subscribe(res => this.topRatedList = res.results);
     this.todayTv.get().subscribe(res => this.todayTvList = res.results);
+    this.popularTv.get().subscribe(res => this.popularTvList = res.results);
+    this.onAir.get().subscribe(res => this.onAirList = res.results);
+    this.topTv.get().subscribe(res => this.topTvList = res.results);
   }
 
   ngOnDestroy() {
