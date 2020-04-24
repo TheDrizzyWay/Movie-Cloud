@@ -1,1 +1,26 @@
-<p>user-login works!</p>
+<div class="user-log-in">
+
+    <div class="user-log-in-container">
+
+      <header class="user-log-in-container-header">
+        <img class="user-log-in-container-header__logo" src="../../../assets/images/logo.jpg" alt="logo"/>
+        <h1 class="user-log-in-container-header__title">Log In</h1>
+        <h2 class="user-log-in-container-header__name">Movie Cloud</h2>
+      </header>
+
+      <div class="user-log-in-container-content">
+        <a href="https://www.themoviedb.org/authenticate/{{ requestToken }}?redirect_to=http://localhost:4200/profile/approved">
+          <button class="user-log-in-container-content__button">Log In</button>
+        </a>
+          <button class="user-log-in-container-content__button" (click)="handleBrowseAsGuest()">Browse as Guest</button>
+      </div>
+
+      <p class="user-log-in-container-content__warning">Guest users have access to limited features</p>
+
+    </div>
+
+    <div class="user-log-in-side-image">
+      <h2 class="user-log-in-side-image__title">Browse and rate your favorite shows</h2>
+    </div>
+
+  </div>
