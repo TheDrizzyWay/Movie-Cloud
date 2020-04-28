@@ -23,7 +23,9 @@ export class UserProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.sessionData);
+    if(this.status == 'approved' && !this.sessionData) {
+      console.log('do it');
+    }
     
   }
 

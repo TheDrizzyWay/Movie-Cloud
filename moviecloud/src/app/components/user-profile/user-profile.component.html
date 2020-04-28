@@ -1,1 +1,27 @@
-<p>user-profile works!</p>
+<div class="user-profile">
+    <app-main-nav></app-main-nav>
+
+    <div class="user-profile-container">
+        <aside class="user-profile-container-aside">
+
+            <nav class="user-profile-container-aside-nav">
+
+              <div class="user-profile-container-aside-nav-profile wow swing" data-wow-delay=".5s" data-wow-duration="5s">
+                <img class="user-profile-container-aside-nav-profile-image" src="{{ userDetails?.avatar ? 'https://secure.gravatar.com/avatar/' + userDetails.avatar.gravatar.hash + '.jpg?s=64' : '../../../assets/images/profile-avatar.jpeg' }}" alt="user" />
+                <div class="user-profile-container-aside-nav-profile-info">
+                  <h2 class="user-profile-container-aside-nav-profile-info__user-name">Welcome {{ userDetails?.username ? userDetails.username : 'Guest' }}</h2>
+                  <p class="user-profile-container-aside-nav-profile-info__user-type">{{ userDetails?.username ? 'TMDB User' : 'Guest' }}</p>
+                </div>
+              </div>
+
+              <a>
+                <button (click)="this.handleDeleteSession(session.session_id)" class="user-profile-container-aside-nav-log-out wow fadeInUp" data-wow-delay=".5s" data-wow-duration="5s">Log Out</button>
+              </a>
+
+            </nav>
+        </aside>
+
+    </div>
+
+    <app-loader></app-loader>
+</div>
