@@ -11,7 +11,6 @@ export class GlobalService {
   private tvGenreSubject: Subject<Genre>;
   private serviceConstants: Object;
   private subjectConstants: Object;
-  private guestSubject: Subject<string>;
 
   constructor(
     private movieGenre: MovieGenreService,
@@ -19,7 +18,6 @@ export class GlobalService {
     ) {
       this.movieGenreSubject = new Subject<Genre>();
       this.tvGenreSubject = new Subject<Genre>();
-      this.guestSubject = new Subject<string>();
 
       this.serviceConstants = Object.freeze({ 
         movie_genre: this.movieGenre,
@@ -41,10 +39,6 @@ export class GlobalService {
 
   getEntity(entity: string): Observable<any> {
     return this.subjectConstants[entity].asObservable();
-  }
-
-  sendGuestId(id: string): void {
-    this.guestSubject.next(id);
   }
 
 }

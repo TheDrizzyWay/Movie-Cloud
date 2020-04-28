@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '@app/services/auth/auth.service';
-import { GlobalService } from '@app/services/global/global.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -10,10 +9,10 @@ import { Router } from '@angular/router';
 })
 export class UserLoginComponent implements OnInit {
   requestToken: string;
+  loading: boolean;
 
   constructor(
     private auth: AuthService,
-    private global: GlobalService,
     private router: Router
     ) { }
 
@@ -21,14 +20,17 @@ export class UserLoginComponent implements OnInit {
     this.auth.getRequestToken().subscribe(res => this.requestToken = res.request_token);
   }
 
-  handleBrowseAsGuest(): Promise<boolean> {
+  handleBrowseAsGuest() {
+    this.loading = true;
     this.auth.getGuestSession().subscribe(res => {
       if(res.success) {
-        this.global.sendGuestId(res.guest_session_id);
+        this.auth.saveSession(res);
+        this.loading = false;
+        this.router.navigate(['profile', 'guest']);
+      } else {
+        this.loading = false;
       }
     });
-    
-    return this.router.navigate(['profile', 'guest']);
   }
 
 }

@@ -23,4 +23,12 @@ export class AuthService {
    getGuestSession(): Observable<GuestToken> {
     return this.http.get<any>(`${this.baseUrl}/guest_session/new?api_key=${this.apiKey}`);
    }
+
+   saveSession(sessionData: GuestToken): void {
+    window.localStorage.setItem('session', JSON.stringify(sessionData));
+   }
+
+   getSession(): GuestToken {
+    return JSON.parse(window.localStorage.getItem('session'));
+   }
 }
