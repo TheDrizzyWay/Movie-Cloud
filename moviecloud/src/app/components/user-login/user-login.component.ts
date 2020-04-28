@@ -17,6 +17,14 @@ export class UserLoginComponent implements OnInit {
     ) { }
 
   ngOnInit() {
+    const sessionData = this.auth.getSession();
+    if(sessionData) {
+      if(sessionData.session_id) {
+        return this.router.navigate(['profile', 'approved']);
+      } else {
+        return this.router.navigate(['profile', 'guest']);
+      }
+    }
     this.auth.getRequestToken().subscribe(res => this.requestToken = res.request_token);
   }
 

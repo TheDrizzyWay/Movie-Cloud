@@ -22,32 +22,125 @@
         </aside>
 
         <main class="user-profile-container-main">
+
             <div class="user-profile-container-main-info">
 
                 <div class="user-profile-container-main-info-item">
                   <svg class="user-profile-container-main-info-item__image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M360 64H152c-22.002 0-40 17.998-40 40v344l144-64 144 64V104c0-22.002-17.998-40-40-40z"/></svg>
-                  <p class="user-profile-container-main-info-item-content"><span class="user-profile-container-main-info-item-content__number">{{ favoriteMovies.length }}</span> Favorite Movies</p>
+                  <p class="user-profile-container-main-info-item-content"><span class="user-profile-container-main-info-item-content__number">{{ favoriteMovies.length }} </span> Favorite Movies</p>
                 </div>
   
                 <div class="user-profile-container-main-info-item">
                   <svg class="user-profile-container-main-info-item__image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M360 64H152c-22.002 0-40 17.998-40 40v344l144-64 144 64V104c0-22.002-17.998-40-40-40z"/></svg>
-                  <p class="user-profile-container-main-info-item-content"><span class="user-profile-container-main-info-item-content__number">{{ favoriteShows.length }}</span> Favorite TV Shows</p>
-                </div>
-  
-                <!-- <div class="user-profile-container-main-info-item">
-                  <svg class="user-profile-container-main-info-item__image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 372.686L380.83 448l-33.021-142.066L458 210.409l-145.267-12.475L256 64l-56.743 133.934L54 210.409l110.192 95.525L131.161 448z"/></svg>
-                  <p class="user-profile-container-main-info-item-content"><span class="user-profile-container-main-info-item-content__number">{this.props.moviesRated.results.length}</span> Rated Movies</p>
+                  <p class="user-profile-container-main-info-item-content"><span class="user-profile-container-main-info-item-content__number">{{ favoriteShows.length }} </span> Favorite TV Shows</p>
                 </div>
   
                 <div class="user-profile-container-main-info-item">
                   <svg class="user-profile-container-main-info-item__image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 372.686L380.83 448l-33.021-142.066L458 210.409l-145.267-12.475L256 64l-56.743 133.934L54 210.409l110.192 95.525L131.161 448z"/></svg>
-                  <p class="user-profile-container-main-info-item-content"><span class="user-profile-container-main-info-item-content__number">{this.props.TVRated.results.length}</span> Rated TV Shows</p>
-                </div> -->
+                  <p class="user-profile-container-main-info-item-content"><span class="user-profile-container-main-info-item-content__number">{{ ratedMovies.length }} </span> Rated Movies</p>
+                </div>
   
-              </div>
-        </main>
+                <div class="user-profile-container-main-info-item">
+                  <svg class="user-profile-container-main-info-item__image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 372.686L380.83 448l-33.021-142.066L458 210.409l-145.267-12.475L256 64l-56.743 133.934L54 210.409l110.192 95.525L131.161 448z"/></svg>
+                  <p class="user-profile-container-main-info-item-content"><span class="user-profile-container-main-info-item-content__number">{{ ratedShows.length }} </span> Rated TV Shows</p>
+                </div>
+  
+            </div>
 
+            <div class="user-profile-container-main-content">
+
+                <div class="user-profile-container-main-container">
+                  <header class="user-profile-container-main-container-header">
+                    <h3 class="user-profile-container-main-container-header__title wow fadeIn" data-wow-duration="3s">Favorite Movies</h3>
+                    <hr class="user-profile-container-main-container-header__separator" />
+                  </header>
+                  <div class="user-profile-container-main-container-item">
+                    <div *ngIf="favoriteMovies.length > 0;else noMovies">
+                        <a *ngFor="let movie of favoriteMovies" [routerLink]="['/details/movie', movie.id]">
+                            <div class="user-profile-container-main-container-item-container">
+                              <img class="user-profile-container-main-container-item-container__image" src="{{ tmdb.secure_base_url }}{{ tmdb.poster_sizes[1] }}{{ movie.poster_path }}" alt="{{ movie.title }}"/>
+                              <h4 class="user-profile-container-main-container-item-container__title">{{ movie.title }}</h4>
+                              <p class="user-profile-container-main-container-item-container__genres">{{ handleGenres(movie.genre_ids, 'movie').name1 }}{{ handleGenres(movie.genre_ids, 'movie').name2 }}</p>
+                            </div>
+                        </a>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="user-profile-container-main-container">
+                    <header class="user-profile-container-main-container-header">
+                      <h3 class="user-profile-container-main-container-header__title wow fadeIn" data-wow-duration="3s">TV Shows</h3>
+                      <hr class="user-profile-container-main-container-header__separator" />
+                    </header>
+                    <div class="user-profile-container-main-container-item">
+                      <div *ngIf="favoriteShows.length > 0;else noShows">
+                        <a *ngFor="let show of favoriteShows" [routerLink]="['/details/tv', show.id]">
+                          <div class="user-profile-container-main-container-item-container">
+                            <img class="user-profile-container-main-container-item-container__image" src="{{ tmdb.secure_base_url }}{{ tmdb.poster_sizes[1] }}{{ show.poster_path }}" alt="{{ show.name }}"/>
+                            <h4 class="user-profile-container-main-container-item-container__title">{{ show.name }}</h4>
+                            <p class="user-profile-container-main-container-item-container__genres">{{ handleGenres(show.genre_ids, 'tv').name1 }}{{ handleGenres(show.genre_ids, 'tv').name2 }}</p>
+                          </div>
+                        </a>
+                      </div>
+                    </div>
+                </div>
+
+                <div class="user-profile-container-main-container">
+                    <header class="user-profile-container-main-container-header">
+                      <h3 class="user-profile-container-main-container-header__title wow fadeIn" data-wow-duration="3s">Movies Rated</h3>
+                      <hr class="user-profile-container-main-container-header__separator" />
+                    </header>
+                    <div class="user-profile-container-main-container-item">
+                      <div *ngIf="ratedMovies.length > 0;else noMoviesRated">
+                          <a *ngFor="let movie of ratedMovies" [routerLink]="['/details/movie', movie.id]">
+                              <div class="user-profile-container-main-container-item-container">
+                                <img class="user-profile-container-main-container-item-container__image" src="{{ tmdb.secure_base_url }}{{ tmdb.poster_sizes[1] }}{{ movie.poster_path }}" alt="{{ movie.title }}"/>
+                                <h4 class="user-profile-container-main-container-item-container__title">{{ movie.title }}</h4>
+                                <p class="user-profile-container-main-container-item-container__genres">{{ handleGenres(movie.genre_ids, 'movie').name1 }}{{ handleGenres(movie.genre_ids, 'movie').name2 }}</p>
+                              </div>
+                          </a>
+                      </div>
+                    </div>
+                  </div>
+  
+                  <div class="user-profile-container-main-container">
+                      <header class="user-profile-container-main-container-header">
+                        <h3 class="user-profile-container-main-container-header__title wow fadeIn" data-wow-duration="3s">TV Shows Rated</h3>
+                        <hr class="user-profile-container-main-container-header__separator" />
+                      </header>
+                      <div class="user-profile-container-main-container-item">
+                        <div *ngIf="ratedShows.length > 0;else noShowsRated">
+                          <a *ngFor="let show of ratedShows" [routerLink]="['/details/tv', show.id]">
+                            <div class="user-profile-container-main-container-item-container">
+                              <img class="user-profile-container-main-container-item-container__image" src="{{ tmdb.secure_base_url }}{{ tmdb.poster_sizes[1] }}{{ show.poster_path }}" alt="{{ show.name }}"/>
+                              <h4 class="user-profile-container-main-container-item-container__title">{{ show.name }}</h4>
+                              <p class="user-profile-container-main-container-item-container__genres">{{ handleGenres(show.genre_ids, 'tv').name1 }}{{ handleGenres(show.genre_ids, 'tv').name2 }}</p>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                  </div>
+
+            </div>
+
+        </main>
     </div>
 
     <app-loader></app-loader>
 </div>
+
+<ng-template #noMovies>
+    <h3 class="user-profile-container-main-container-item-warning">No favorite movies found</h3>
+</ng-template>
+
+<ng-template #noShows>
+    <h3 class="user-profile-container-main-container-item-warning">No favorite tv shows found</h3>
+</ng-template>
+
+<ng-template #noMoviesRated>
+    <h3 class="user-profile-container-main-container-item-warning">No rated movies found</h3>
+</ng-template>
+
+<ng-template #noShowsRated>
+    <h3 class="user-profile-container-main-container-item-warning">No rated tv shows found</h3>
+</ng-template>
