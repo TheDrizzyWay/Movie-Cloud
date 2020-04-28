@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
-import { RequestToken, GuestToken } from '@app/models/AuthResponses';
+import { RequestToken, GuestToken, SessionToken } from '@app/models/AuthResponses';
+import { User } from '@app/models/User';
 
 @Injectable({
   providedIn: 'root'
@@ -20,15 +21,35 @@ export class AuthService {
     return this.http.get<any>(`${this.baseUrl}/token/new?api_key=${this.apiKey}`);
    }
 
+   getUserSession(token: string): Observable<SessionToken> {
+     return this.http.post<any>(`${this.baseUrl}/session/new?api_key=${this.apiKey}`, { request_token: token });
+   }
+
    getGuestSession(): Observable<GuestToken> {
     return this.http.get<any>(`${this.baseUrl}/guest_session/new?api_key=${this.apiKey}`);
    }
 
-   saveSession(sessionData: GuestToken): void {
+   getUserDetails(sessionId: string): Observable<User> {
+     return this.http.get<any>(`https://api.themoviedb.org/3/account?api_key=${this.apiKey}&session_id=${sessionId}`);
+   }
+
+   deleteSession() {
+     return window.localStorage.clear();
+   }
+
+   saveSession(sessionData: GuestToken | SessionToken): void {
     window.localStorage.setItem('session', JSON.stringify(sessionData));
    }
 
-   getSession(): GuestToken {
+   getSession(): GuestToken | SessionToken {
     return JSON.parse(window.localStorage.getItem('session'));
+   }
+
+   saveUser(user: User): void {
+    window.localStorage.setItem('user', JSON.stringify(user));
+   }
+
+   getUser(): User {
+     return JSON.parse(window.localStorage.getItem('user'));
    }
 }

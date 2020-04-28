@@ -8,4 +8,10 @@ export interface GuestToken {
     success: boolean;
     expires_at: string;
     guest_session_id: string;
+    session_id?: string;
+}
+
+export interface SessionToken {
+    success: boolean;
+    session_id: string;
 }
