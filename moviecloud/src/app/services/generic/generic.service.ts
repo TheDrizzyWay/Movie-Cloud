@@ -23,10 +23,6 @@ export class GenericService<T extends Resource> {
     this.fullUrl = `${this.baseUrl}/${this.endpoint}?api_key=${this.apiKey}&language=en-US&page=1`
   }
 
-    // public create(item: T): Observable<T> {
-    //   return this.http.post<any>(`${this.fullUrl}/`, item);
-    // }
-
     public get(): Observable<T> {
       return this.http.get<any>(this.fullUrl)
       .pipe(catchError(err => this.handleError(err)));
