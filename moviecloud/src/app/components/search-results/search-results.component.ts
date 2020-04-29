@@ -4,6 +4,7 @@ import { Movie } from '@app/models/Movie';
 import { TvShow } from '@app/models/TvShow';
 import { TopRatedService, UpcomingService, NowPlayingService, PopularService } from '@app/services/movies/movie.service';
 import { TodayService, PopularTvService, OnAirService, TopRatedTvService } from '@app/services/tv/tv.service';
+import { DiscoverService } from '@app/services/discover/discover.service';
 
 @Component({
   selector: 'app-search-results',
@@ -24,7 +25,8 @@ export class SearchResultsComponent implements OnInit {
     private todayTv: TodayService,
     private popularTv: PopularTvService,
     private onAir: OnAirService,
-    private topTv: TopRatedTvService
+    private topTv: TopRatedTvService,
+    private discover: DiscoverService
     ) { 
     this.searchResults = [];
     this.page = 1;
@@ -34,31 +36,48 @@ export class SearchResultsComponent implements OnInit {
   ngOnInit() {
     this.route.paramMap.subscribe(res => {
       this.searchTerm = res.get('id');
-      this.handleSearch(this.searchTerm);
+      this.handleSearch(this.searchTerm, this.page);
     });
   }
 
-  handleSearch(id: string) {
+  handleSearch(id: string, page: number) {
     switch (id) {
       case 'top-rated-movies':
-        this.topRated.get().subscribe(res => this.searchResults = res.results);
+        this.topRated.get(page).subscribe(res => this.searchResults = res.results);
         break;
 
       case 'upcoming-movies':
-        this.upcoming.get().subscribe(res => this.searchResults = res.results);
+        this.upcoming.get(page).subscribe(res => this.searchResults = res.results);
         break;
 
       case 'now-playing-movies':
-        this.nowPlaying.get().subscribe(res => this.searchResults = res.results);
+        this.nowPlaying.get(page).subscribe(res => this.searchResults = res.results);
         break;
 
       case 'popular-movies':
-        this.popular.get().subscribe(res => this.searchResults = res.results);
+        this.popular.get(page).subscribe(res => this.searchResults = res.results);
         break;
 
       case 'popular-tv-shows':
+        this.popularTv.get(page).subscribe(res => this.searchResults = res.results);
+        break;
+
+      case 'top-rated-tv-shows':
+        this.topTv.get(page).subscribe(res => this.searchResults = res.results);
+        break;
+
+      case 'on-the-air-tv-shows':
+        this.onAir.get(page).subscribe(res => this.searchResults = res.results);
+        break;
+
+      case 'airing-today-tv-shows':
+        this.todayTv.get(page).subscribe(res => this.searchResults = res.results);
+        break;
+
+      case 'popular-people':
         break;
       default:
+        this.discover.search(id, page).subscribe(res => this.searchResults = res.results);
         break;
     }
   }

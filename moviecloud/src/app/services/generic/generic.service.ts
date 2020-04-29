@@ -20,11 +20,11 @@ export class GenericService<T extends Resource> {
   ) { 
     this.baseUrl = "https://api.themoviedb.org/3";
     this.apiKey = environment.apiKey;
-    this.fullUrl = `${this.baseUrl}/${this.endpoint}?api_key=${this.apiKey}&language=en-US&page=1`
+    this.fullUrl = `${this.baseUrl}/${this.endpoint}?api_key=${this.apiKey}&language=en-US`
   }
 
-    public get(): Observable<T> {
-      return this.http.get<any>(this.fullUrl)
+    public get(page: number = 1): Observable<T> {
+      return this.http.get<any>(`${this.fullUrl}&page=${page}`)
       .pipe(catchError(err => this.handleError(err)));
     }
 

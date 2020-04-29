@@ -22,4 +22,8 @@ export class DiscoverService {
     return this.http.get<any>(`${this.discoverUrl}/movie?api_key=${this.apiKey}&language=en-US&sort_by=${options.sortBy}&include_adult=false&include_video=false&page=${page}&${options.voteAverage ? `vote_average.gte=${options.voteAverage}&` : ''}${options.withGenres ? `with_genres=${options.withGenres}&` : ''}${options.withPeople ? `with_people=${options.withPeople}&` : ''}${options.year ? `year=${options.year}` : ''}`)
       .pipe(map(res => res.results));
   }
+
+  search(searchTerm: string, page: number): Observable<any> {
+    return this.http.get<any>(`https://api.themoviedb.org/3/search/multi?api_key=${this.apiKey}&language=en-US&query=${searchTerm}&page=${page}&include_adult=false`);
+  }
 }
