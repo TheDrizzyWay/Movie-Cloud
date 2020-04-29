@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from '@app/services/auth/auth.service';
 import { GuestToken, SessionToken } from '@app/models/AuthResponses';
 import { User } from '@app/models/User';
@@ -7,7 +8,6 @@ import { AccountService } from '@app/services/account/account.service';
 import { Movie } from '@app/models/Movie';
 import { TvShow } from '@app/models/TvShow';
 import { tmdbConfig } from '@app/utils/constants';
-import { Subscription } from 'rxjs';
 import { GlobalService } from '@app/services/global/global.service';
 import { Genre } from '@app/models/Genre';
 

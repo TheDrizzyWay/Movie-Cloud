@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Movie } from '@app/models/Movie';
 import { DiscoverOptions } from '@app/models/DiscoverOptions';
+import { People } from '@app/models/People';
 
 @Injectable({
   providedIn: 'root'
@@ -26,4 +27,10 @@ export class DiscoverService {
   search(searchTerm: string, page: number): Observable<any> {
     return this.http.get<any>(`https://api.themoviedb.org/3/search/multi?api_key=${this.apiKey}&language=en-US&query=${searchTerm}&page=${page}&include_adult=false`);
   }
+
+  getPopularPeople(page: number): Observable<People[]> {
+    return this.http.get<any>(`https://api.themoviedb.org/3/person/popular?api_key=${this.apiKey}&language=en-US&page=${page}`)
+    .pipe(map(res => res.results));
+  }
+
 }

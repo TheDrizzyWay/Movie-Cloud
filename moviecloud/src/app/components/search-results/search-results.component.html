@@ -9,7 +9,19 @@
             <hr class="search-results-main-header__separator" />
         </header>
 
-          <!-- {searchResults()} -->
+          <div *ngIf="searchResults.length > 0">
+            <div [ngSwitch]="searchTerm">
+                <div *ngSwitchCase="'popular-people'" class="search-results-main-body">
+                    <a *ngFor="let person of searchResults" [routerLink]="['/details/people', person.id]">
+                        <div class="search-results-main-body-item">
+                            <img class="search-results-main-body-item__image" src="{{ tmdb.secure_base_url + tmdb.poster_sizes[6] + person.profile_path }}" alt="" />
+                            <h3 class="search-results-main-body-item__title">{{ person.name }}</h3>
+                        </div>
+                    </a>
+                </div>
+                <div *ngSwitchDefault>output2</div>
+            </div>
+          </div>
 
         <div class="search-results-main-pagination">
             <button class="search-results-main-pagination__button" (click)="getPreviousPage()" [disabled]="page == 1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M320 128L192 256l128 128z"/></svg>Previous</button>

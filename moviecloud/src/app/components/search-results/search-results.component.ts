@@ -5,6 +5,8 @@ import { TvShow } from '@app/models/TvShow';
 import { TopRatedService, UpcomingService, NowPlayingService, PopularService } from '@app/services/movies/movie.service';
 import { TodayService, PopularTvService, OnAirService, TopRatedTvService } from '@app/services/tv/tv.service';
 import { DiscoverService } from '@app/services/discover/discover.service';
+import { People } from '@app/models/People';
+import { tmdbConfig } from '@app/utils/constants';
 
 @Component({
   selector: 'app-search-results',
@@ -13,8 +15,9 @@ import { DiscoverService } from '@app/services/discover/discover.service';
 })
 export class SearchResultsComponent implements OnInit {
   searchTerm: string;
-  searchResults: Movie[] | TvShow[];
+  searchResults: Movie[] | TvShow[] | People[];
   page: number;
+  tmdb: object = tmdbConfig;
 
   constructor(
     private route: ActivatedRoute,
@@ -40,8 +43,8 @@ export class SearchResultsComponent implements OnInit {
     });
   }
 
-  handleSearch(id: string, page: number) {
-    switch (id) {
+  handleSearch(searchTerm: string, page: number) {
+    switch (searchTerm) {
       case 'top-rated-movies':
         this.topRated.get(page).subscribe(res => this.searchResults = res.results);
         break;
@@ -75,9 +78,11 @@ export class SearchResultsComponent implements OnInit {
         break;
 
       case 'popular-people':
+        this.discover.getPopularPeople(page).subscribe(res => this.searchResults = res);
         break;
+
       default:
-        this.discover.search(id, page).subscribe(res => this.searchResults = res.results);
+        this.discover.search(searchTerm, page).subscribe(res => this.searchResults = res.results);
         break;
     }
   }

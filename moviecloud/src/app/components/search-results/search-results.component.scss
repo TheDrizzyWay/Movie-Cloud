@@ -109,6 +109,10 @@
           }
         }
 
+        &:disabled {
+          cursor: not-allowed;
+        }
+
         svg {
           fill: $primary-font-color;
           height: auto;
