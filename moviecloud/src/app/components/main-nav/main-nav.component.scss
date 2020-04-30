@@ -67,9 +67,9 @@
     // main-nav-top-section__image
     &__image {
       cursor: pointer;
-      height: auto;
-      margin: 0 auto;
-      width: 50px;
+      height: 73px;
+      margin: 0;
+      width: auto;
     }
 
     .main-nav-search-form {
@@ -90,7 +90,7 @@
         border-radius: 20px;
         cursor: pointer;
         height: 35px;
-        left: 125px;
+        left: 100px;
         outline: none;
         position: absolute;
         top: 0;
@@ -144,11 +144,18 @@
   .main-nav {
 
     &-top-section {
+      &__image {
+        height: 71px;
+        width: 90px;
+      }
 
       .main-nav-search-form {
+        &__input {
+          margin-left: 35px;
+        }
 
         &__button {
-          left: 129px;
+          left: 165px;
         }
       }
     }
@@ -244,7 +251,7 @@
 
         &__input {
           padding: 12px;
-          width: 380px;
+          width: 365px;
         }
 
         &__button {
