@@ -19,7 +19,87 @@
                         </div>
                     </a>
                 </div>
-                <div *ngSwitchDefault>output2</div>
+                <div *ngSwitchCase="'top-rated-movies'" class="search-results-main-body">
+                    <a *ngFor="let movie of searchResults" [routerLink]="['/details/movie', movie.id]">
+                        <div class="search-results-main-body-item">
+                          <img class="search-results-main-body-item__image" src="{{ tmdb.secure_base_url + tmdb.poster_sizes[6] + movie.poster_path }}" alt="" />
+                          <h3 class="search-results-main-body-item__title">{{ movie.title }}</h3>
+                          <p className="search-results-main-body-item__genres">{{ handleGenres(movie.media_type, movie.genre_ids).name1 }}{{ handleGenres(movie.media_type, movie.genre_ids).name2 }}</p>
+                        </div>
+                    </a>
+                </div>
+                <div *ngSwitchCase="'upcoming-movies'" class="search-results-main-body">
+                    <a *ngFor="let movie of searchResults" [routerLink]="['/details/movie', movie.id]">
+                        <div class="search-results-main-body-item">
+                          <img class="search-results-main-body-item__image" src="{{ tmdb.secure_base_url + tmdb.poster_sizes[6] + movie.poster_path }}" alt="" />
+                          <h3 class="search-results-main-body-item__title">{{ movie.title }}</h3>
+                          <p className="search-results-main-body-item__genres">{{ handleGenres(movie.media_type, movie.genre_ids).name1 }}{{ handleGenres(movie.media_type, movie.genre_ids).name2 }}</p>
+                        </div>
+                    </a>
+                </div>
+                <div *ngSwitchCase="'now-playing-movies'" class="search-results-main-body">
+                    <a *ngFor="let movie of searchResults" [routerLink]="['/details/movie', movie.id]">
+                        <div class="search-results-main-body-item">
+                          <img class="search-results-main-body-item__image" src="{{ tmdb.secure_base_url + tmdb.poster_sizes[6] + movie.poster_path }}" alt="" />
+                          <h3 class="search-results-main-body-item__title">{{ movie.title }}</h3>
+                          <p className="search-results-main-body-item__genres">{{ handleGenres(movie.media_type, movie.genre_ids).name1 }}{{ handleGenres(movie.media_type, movie.genre_ids).name2 }}</p>
+                        </div>
+                    </a>
+                </div>
+                <div *ngSwitchCase="'popular-movies'" class="search-results-main-body">
+                    <a *ngFor="let movie of searchResults" [routerLink]="['/details/movie', movie.id]">
+                        <div class="search-results-main-body-item">
+                          <img class="search-results-main-body-item__image" src="{{ tmdb.secure_base_url + tmdb.poster_sizes[6] + movie.poster_path }}" alt="" />
+                          <h3 class="search-results-main-body-item__title">{{ movie.title }}</h3>
+                          <p className="search-results-main-body-item__genres">{{ handleGenres(movie.media_type, movie.genre_ids).name1 }}{{ handleGenres(movie.media_type, movie.genre_ids).name2 }}</p>
+                        </div>
+                    </a>
+                </div>
+                <div *ngSwitchCase="'popular-tv-shows'" class="search-results-main-body">
+                    <a *ngFor="let show of searchResults" [routerLink]="['/details/tv', show.id]">
+                        <div class="search-results-main-body-item">
+                          <img class="search-results-main-body-item__image" src="{{ tmdb.secure_base_url + tmdb.poster_sizes[6] + show.poster_path }}" alt="" />
+                          <h3 class="search-results-main-body-item__title">{{ show.name }}</h3>
+                          <p className="search-results-main-body-item__genres">{{ handleGenres(show.media_type, show.genre_ids).name1 }}{{ handleGenres(show.media_type, show.genre_ids).name2 }}</p>
+                        </div>
+                    </a>
+                </div>
+                <div *ngSwitchCase="'top-rated-tv-shows'" class="search-results-main-body">
+                    <a *ngFor="let show of searchResults" [routerLink]="['/details/tv', show.id]">
+                        <div class="search-results-main-body-item">
+                          <img class="search-results-main-body-item__image" src="{{ tmdb.secure_base_url + tmdb.poster_sizes[6] + show.poster_path }}" alt="" />
+                          <h3 class="search-results-main-body-item__title">{{ show.name }}</h3>
+                          <p className="search-results-main-body-item__genres">{{ handleGenres(show.media_type, show.genre_ids).name1 }}{{ handleGenres(show.media_type, show.genre_ids).name2 }}</p>
+                        </div>
+                    </a>
+                </div>
+                <div *ngSwitchCase="'on-the-air-tv-shows'" class="search-results-main-body">
+                    <a *ngFor="let show of searchResults" [routerLink]="['/details/tv', show.id]">
+                        <div class="search-results-main-body-item">
+                          <img class="search-results-main-body-item__image" src="{{ tmdb.secure_base_url + tmdb.poster_sizes[6] + show.poster_path }}" alt="" />
+                          <h3 class="search-results-main-body-item__title">{{ show.name }}</h3>
+                          <p className="search-results-main-body-item__genres">{{ handleGenres(show.media_type, show.genre_ids).name1 }}{{ handleGenres(show.media_type, show.genre_ids).name2 }}</p>
+                        </div>
+                    </a>
+                </div>
+                <div *ngSwitchCase="'airing-today-tv-shows'" class="search-results-main-body">
+                    <a *ngFor="let show of searchResults" [routerLink]="['/details/tv', show.id]">
+                        <div class="search-results-main-body-item">
+                          <img class="search-results-main-body-item__image" src="{{ tmdb.secure_base_url + tmdb.poster_sizes[6] + show.poster_path }}" alt="" />
+                          <h3 class="search-results-main-body-item__title">{{ show.name }}</h3>
+                          <p className="search-results-main-body-item__genres">{{ handleGenres(show.media_type, show.genre_ids).name1 }}{{ handleGenres(show.media_type, show.genre_ids).name2 }}</p>
+                        </div>
+                    </a>
+                </div>
+                <div *ngSwitchDefault class="search-results-main-body">
+                    <a *ngFor="let item of searchResults" [routerLink]="['/details', item.media_type, item.id]">
+                        <div class="search-results-main-body-item">
+                            <img class="search-results-main-body-item__image" src="{{ tmdb.secure_base_url + tmdb.poster_sizes[6] + item.poster_path }}" alt="" />
+                            <h3 class="search-results-main-body-item__title">{{ item.title || item.name }}</h3>
+                            <p className="search-results-main-body-item__genres">{{ handleGenres(item.media_type, item.genre_ids).name1 }}{{ handleGenres(item.media_type, item.genre_ids).name2 }}</p>
+                        </div>
+                    </a>
+                </div>
             </div>
           </div>
 
