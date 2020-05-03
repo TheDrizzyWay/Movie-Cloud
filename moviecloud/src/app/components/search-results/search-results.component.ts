@@ -3,8 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Movie } from '@app/models/Movie';
 import { TvShow } from '@app/models/TvShow';
-import { TopRatedService, UpcomingService, NowPlayingService, PopularService } from '@app/services/movies/movie.service';
-import { TodayService, PopularTvService, OnAirService, TopRatedTvService } from '@app/services/tv/tv.service';
+import { TopRatedService, UpcomingService, NowPlayingService, PopularService, OnAirService, TodayService } from '@app/services/movies/movie.service';
 import { DiscoverService } from '@app/services/discover/discover.service';
 import { People } from '@app/models/People';
 import { tmdbConfig } from '@app/utils/constants';
@@ -33,9 +32,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     private nowPlaying: NowPlayingService,
     private popular: PopularService,
     private todayTv: TodayService,
-    private popularTv: PopularTvService,
     private onAir: OnAirService,
-    private topTv: TopRatedTvService,
     private discover: DiscoverService,
     private global: GlobalService
     ) { 
@@ -63,35 +60,35 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
   handleSearch(searchTerm: string, page: number) {
     switch (searchTerm) {
       case 'top-rated-movies':
-        this.topRated.get(page).subscribe(res => this.searchResults = res.results);
+        this.topRated.get('movie', page).subscribe(res => this.searchResults = res.results);
         break;
 
       case 'upcoming-movies':
-        this.upcoming.get(page).subscribe(res => this.searchResults = res.results);
+        this.upcoming.get('movie', page).subscribe(res => this.searchResults = res.results);
         break;
 
       case 'now-playing-movies':
-        this.nowPlaying.get(page).subscribe(res => this.searchResults = res.results);
+        this.nowPlaying.get('movie', page).subscribe(res => this.searchResults = res.results);
         break;
 
       case 'popular-movies':
-        this.popular.get(page).subscribe(res => this.searchResults = res.results);
+        this.popular.get('movie', page).subscribe(res => this.searchResults = res.results);
         break;
 
       case 'popular-tv-shows':
-        this.popularTv.get(page).subscribe(res => this.searchResults = res.results);
+        this.popular.get('tv', page).subscribe(res => this.searchResults = res.results);
         break;
 
       case 'top-rated-tv-shows':
-        this.topTv.get(page).subscribe(res => this.searchResults = res.results);
+        this.topRated.get('tv', page).subscribe(res => this.searchResults = res.results);
         break;
 
       case 'on-the-air-tv-shows':
-        this.onAir.get(page).subscribe(res => this.searchResults = res.results);
+        this.onAir.get('tv', page).subscribe(res => this.searchResults = res.results);
         break;
 
       case 'airing-today-tv-shows':
-        this.todayTv.get(page).subscribe(res => this.searchResults = res.results);
+        this.todayTv.get('tv', page).subscribe(res => this.searchResults = res.results);
         break;
 
       case 'popular-people':

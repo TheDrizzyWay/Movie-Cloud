@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { tmdbConfig } from '@app/utils/constants';
-import { DetailsService } from '@app/services/movies/movie.service';
+import { DetailsService, CreditsService } from '@app/services/movies/movie.service';
 import { Details } from '@app/models/Details';
 
 @Component({
@@ -15,7 +15,8 @@ export class ItemDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private movieDetails: DetailsService
+    private detailsService: DetailsService,
+    private creditsService: CreditsService
     ) { }
 
   ngOnInit() {
@@ -28,7 +29,8 @@ export class ItemDetailsComponent implements OnInit {
   fetchData(id: string, itemType: string) {
     switch (itemType) {
       case 'movie':
-        this.movieDetails.getOne(id).subscribe(res => this.details = res);
+        // this.movieDetails.getOne(id).subscribe(res => this.details = res);
+        // this.movieCredits.getOne(id).subscribe(res => console.log(JSON.stringify(res)));
         break;
       
       case 'tv':

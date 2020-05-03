@@ -1,7 +1,8 @@
 import { Resource } from './Resource';
+import { Movie } from './Movie';
 
 export interface TvShowInterface {
-    results: TvShow[];
+    results: TvShow[] | Movie[];
 }
 export interface TvShow extends Resource {
     original_name: string;

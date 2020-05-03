@@ -22,9 +22,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   sessionData: GuestToken | SessionToken;
   userDetails: User;
   favoriteMovies: Movie[];
-  favoriteShows: TvShow[];
+  favoriteShows: TvShow[] | Movie[];
   ratedMovies: Movie[];
-  ratedShows: TvShow[];
+  ratedShows: TvShow[] | Movie[];
   movieSubscription: Subscription;
   tvSubscription: Subscription;
   movieGenres: Genre[];
