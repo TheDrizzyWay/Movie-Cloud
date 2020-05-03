@@ -17,6 +17,7 @@ import { MainFooterComponent } from './components/main-footer/main-footer.compon
 import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { HomeHeaderComponent } from './components/home-header/home-header.component';
 import { ItemCarouselComponent } from './components/item-carousel/item-carousel.component';
+import { BackButtonDirective } from './shared/back-button/back-button.directive';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { ItemCarouselComponent } from './components/item-carousel/item-carousel.
     MainFooterComponent,
     MainNavComponent,
     HomeHeaderComponent,
-    ItemCarouselComponent
+    ItemCarouselComponent,
+    BackButtonDirective
   ],
   imports: [
     BrowserModule,
