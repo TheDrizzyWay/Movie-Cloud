@@ -13,7 +13,6 @@ export class GenericService<T extends Resource> {
   apiKey: string;
   baseUrl: string;
   fullUrl: string;
-  parameter: string;
   resource: string;
 
   constructor(
@@ -26,20 +25,19 @@ export class GenericService<T extends Resource> {
   }
 
     public get(itemType: string, page: number = 1): Observable<T> {
-      return this.http.get<any>(`${this.baseUrl}/${itemType}/${this.endpoint}?api_key=${this.apiKey}&language=en-US&page=${page}`)
+      if (itemType) {
+        return this.http.get<any>(`${this.baseUrl}/${itemType}/${this.endpoint}?api_key=${this.apiKey}&language=en-US&page=${page}`)
         .pipe(catchError(err => this.handleError(err)));
-    }
+      }
 
-    public getGenres() {
       return this.http.get<any>(`${this.fullUrl}?api_key=${this.apiKey}&language=en-US`)
         .pipe(catchError(err => this.handleError(err)));
     }
 
-    // public getOne(id: string): Observable<T> {
-    //   this.resource = this.endpoint.split('/')[0];
-    //   this.parameter = this.endpoint.split('/')[1] === 'details' ? '' : `/${this.endpoint.split('/')[1]}`;
-    //   return this.http.get<any>(`${this.baseUrl}/${this.resource}/${id}${this.parameter}?api_key=${this.apiKey}&language=en-US`);
-    // }
+    public getOne(itemType: string, id: string): Observable<T> {
+      this.resource = this.endpoint.split(' ')[0] === 'details' ? '' : `/${this.endpoint.split('')[0]}`;
+      return this.http.get<any>(`${this.baseUrl}/${itemType}/${id}${this.resource}?api_key=${this.apiKey}&language=en-US`);
+    }
 
     private handleError(err: any): Observable<any> {
       console.log(err);

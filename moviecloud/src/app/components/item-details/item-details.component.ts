@@ -29,7 +29,7 @@ export class ItemDetailsComponent implements OnInit {
   fetchData(id: string, itemType: string) {
     switch (itemType) {
       case 'movie':
-        // this.movieDetails.getOne(id).subscribe(res => this.details = res);
+        this.detailsService.getOne('movie', id).subscribe(res => this.details = res);
         // this.movieCredits.getOne(id).subscribe(res => console.log(JSON.stringify(res)));
         break;
       

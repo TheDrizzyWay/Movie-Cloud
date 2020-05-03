@@ -34,7 +34,7 @@ export class GlobalService {
     const entityService = this.serviceConstants[entity];
     const entitySubject = this.subjectConstants[entity];
 
-    entityService.getGenres().subscribe(res => entitySubject.next(res));
+    entityService.get().subscribe(res => entitySubject.next(res));
   }
 
   getEntity(entity: string): Observable<any> {

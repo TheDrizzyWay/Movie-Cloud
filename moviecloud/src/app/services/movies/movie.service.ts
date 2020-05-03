@@ -71,7 +71,7 @@ export class OnAirService extends GenericService<TvShowInterface> {
 export class DetailsService extends GenericService<Details> {
 
   constructor(http: HttpClient) { 
-    super(http, 'movie/details');
+    super(http, 'details');
   }
 }
 
@@ -81,6 +81,6 @@ export class DetailsService extends GenericService<Details> {
 export class CreditsService extends GenericService<Details> {
 
   constructor(http: HttpClient) { 
-    super(http, 'movie/credits');
+    super(http, '/credits');
   }
 }
