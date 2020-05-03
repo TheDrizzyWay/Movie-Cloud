@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { tmdbConfig } from '@app/utils/constants';
+import { DetailsService } from '@app/services/movies/movie.service';
+import { Details } from '@app/models/Details';
 
 @Component({
   selector: 'app-item-details',
@@ -9,9 +11,11 @@ import { tmdbConfig } from '@app/utils/constants';
 })
 export class ItemDetailsComponent implements OnInit {
   itemType: string;
+  details: Details;
 
   constructor(
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private movieDetails: DetailsService
     ) { }
 
   ngOnInit() {
@@ -22,7 +26,22 @@ export class ItemDetailsComponent implements OnInit {
   }
 
   fetchData(id: string, itemType: string) {
+    switch (itemType) {
+      case 'movie':
+        this.movieDetails.getOne(id).subscribe(res => this.details = res);
+        break;
+      
+      case 'tv':
+        
+        break;
 
+      case 'people':
+        
+        break;
+
+      default:
+        break;
+    }
   }
 
   styleBackground() {

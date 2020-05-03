@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { GenericService } from '../generic/generic.service';
 import { HttpClient } from '@angular/common/http';
 import { MovieInterface } from '@app/models/Movie';
+import { Details } from '@app/models/Details';
 
 @Injectable({
   providedIn: 'root'
@@ -42,3 +43,14 @@ export class TopRatedService extends GenericService<MovieInterface> {
     super(http, 'movie/top_rated');
   }
 }
+
+@Injectable({
+  providedIn: 'root'
+})
+export class DetailsService extends GenericService<Details> {
+
+  constructor(http: HttpClient) { 
+    super(http, 'movie/details');
+  }
+}
+
