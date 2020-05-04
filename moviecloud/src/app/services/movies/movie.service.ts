@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { MovieInterface } from '@app/models/Movie';
 import { TvShowInterface } from '@app/models/TvShow';
 import { Details } from '@app/models/Details';
+import { Credit } from '@app/models/Credit';
+import { Trailer } from '@app/models/Trailer';
+import { Review } from '@app/models/Review';
 
 @Injectable({
   providedIn: 'root'
@@ -78,9 +81,29 @@ export class DetailsService extends GenericService<Details> {
 @Injectable({
   providedIn: 'root'
 })
-export class CreditsService extends GenericService<Details> {
+export class CreditsService extends GenericService<Credit> {
 
   constructor(http: HttpClient) { 
-    super(http, '/credits');
+    super(http, 'credits');
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class TrailerService extends GenericService<Trailer> {
+
+  constructor(http: HttpClient) { 
+    super(http, 'videos');
+  }
+}
+
+@Injectable({
+  providedIn: 'root'
+})
+export class ReviewService extends GenericService<Review> {
+
+  constructor(http: HttpClient) { 
+    super(http, 'reviews');
   }
 }

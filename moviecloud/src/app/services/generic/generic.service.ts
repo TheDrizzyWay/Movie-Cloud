@@ -35,7 +35,7 @@ export class GenericService<T extends Resource> {
     }
 
     public getOne(itemType: string, id: string): Observable<T> {
-      this.resource = this.endpoint.split(' ')[0] === 'details' ? '' : `/${this.endpoint.split('')[0]}`;
+      this.resource = this.endpoint.split('/')[0] === 'details' ? '' : `/${this.endpoint.split('/')[0]}`;
       return this.http.get<any>(`${this.baseUrl}/${itemType}/${id}${this.resource}?api_key=${this.apiKey}&language=en-US`);
     }
 
