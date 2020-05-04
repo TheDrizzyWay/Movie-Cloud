@@ -5,22 +5,21 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Movie } from '@app/models/Movie';
 import { DiscoverOptions } from '@app/models/DiscoverOptions';
-import { People } from '@app/models/People';
+import { People, PeopleDetails } from '@app/models/People';
+import { CombinedCredit } from '@app/models/CombinedCredit';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DiscoverService {
   apiKey: string;
-  discoverUrl: string;
 
   constructor(private http: HttpClient) { 
     this.apiKey = environment.apiKey;
-    this.discoverUrl = 'https://api.themoviedb.org/3/discover';
   }
 
   get(page: number, options: DiscoverOptions): Observable<Movie[]> {
-    return this.http.get<any>(`${this.discoverUrl}/movie?api_key=${this.apiKey}&language=en-US&sort_by=${options.sortBy}&include_adult=false&include_video=false&page=${page}&${options.voteAverage ? `vote_average.gte=${options.voteAverage}&` : ''}${options.withGenres ? `with_genres=${options.withGenres}&` : ''}${options.withPeople ? `with_people=${options.withPeople}&` : ''}${options.year ? `year=${options.year}` : ''}`)
+    return this.http.get<any>(`https://api.themoviedb.org/3/discover/movie?api_key=${this.apiKey}&language=en-US&sort_by=${options.sortBy}&include_adult=false&include_video=false&page=${page}&${options.voteAverage ? `vote_average.gte=${options.voteAverage}&` : ''}${options.withGenres ? `with_genres=${options.withGenres}&` : ''}${options.withPeople ? `with_people=${options.withPeople}&` : ''}${options.year ? `year=${options.year}` : ''}`)
       .pipe(map(res => res.results));
   }
 
@@ -31,6 +30,14 @@ export class DiscoverService {
   getPopularPeople(page: number): Observable<People[]> {
     return this.http.get<any>(`https://api.themoviedb.org/3/person/popular?api_key=${this.apiKey}&language=en-US&page=${page}`)
     .pipe(map(res => res.results));
+  }
+
+  getPeopleDetails(id: string): Observable<PeopleDetails> {
+    return this.http.get<any>(`https://api.themoviedb.org/3/person/${id}?api_key=${this.apiKey}&language=en-US`);
+  }
+
+  getPeopleCombinedCredits(id: string): Observable<CombinedCredit> {
+    return this.http.get<any>(`https://api.themoviedb.org/3/person/${id}/combined_credits?api_key=${this.apiKey}&language=en-US`);
   }
 
 }

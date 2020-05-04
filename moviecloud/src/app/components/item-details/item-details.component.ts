@@ -6,6 +6,9 @@ import { Details } from '@app/models/Details';
 import { Credit } from '@app/models/Credit';
 import { Trailer } from '@app/models/Trailer';
 import { Review } from '@app/models/Review';
+import { DiscoverService } from '@app/services/discover/discover.service';
+import { PeopleDetails } from '@app/models/People';
+import { CombinedCredit } from '@app/models/CombinedCredit';
 
 @Component({
   selector: 'app-item-details',
@@ -18,13 +21,16 @@ export class ItemDetailsComponent implements OnInit {
   credits: Credit;
   trailers: Trailer;
   reviews: Review;
+  combinedCredits: CombinedCredit;
+  peopleDetails: PeopleDetails;
 
   constructor(
     private route: ActivatedRoute,
     private detailsService: DetailsService,
     private creditsService: CreditsService,
     private trailerService: TrailerService,
-    private reviewService: ReviewService
+    private reviewService: ReviewService,
+    private discover: DiscoverService
     ) { }
 
   ngOnInit() {
@@ -36,7 +42,8 @@ export class ItemDetailsComponent implements OnInit {
 
   fetchData(id: string, itemType: string) {
     if(itemType == 'people') {
-      //do people
+      this.discover.getPeopleDetails(id).subscribe(res => this.peopleDetails = res);
+      this.discover.getPeopleCombinedCredits(id).subscribe(res => this.combinedCredits = res);
     } else {
       this.detailsService.getOne(itemType, id).subscribe(res => this.details = res);
       this.creditsService.getOne(itemType, id).subscribe(res => this.credits = res);
@@ -47,14 +54,18 @@ export class ItemDetailsComponent implements OnInit {
 
   styleBackground() {
     let backdropUrl: string = '';
-    if (this.itemType == 'people') {
-
+    if (this.itemType == 'people' && this.combinedCredits) {
+      backdropUrl = this.combinedCredits.cast.length > 0 ? this.combinedCredits.cast[0].backdrop_path : '';
     } else {
-
+      if(this.details) {
+        backdropUrl = this.details.backdrop_path;
+      }
     }
-    // return { 'background': `linear-gradient(0deg, rgba(0,0,0,1) 5%, rgba(0,0,0,0.45) 92%) center center no-repeat, #fff
-    //                           url(${tmdbConfig.secure_base_url}original${this.itemType === 'people' ? `${this.props.location.state ? this.props.location.state.backdropUrl : `${this.props.peopleCombinedCredits.cast.length > 0 ? this.props.peopleCombinedCredits.cast[0].backdrop_path : ''}`}` : `${this.props.match.params.type === 'movie' ? this.props.movieDetails.backdrop_path : this.props.TVDetails.backdrop_path}`}` : ''})
-    //                           center top no-repeat` };
+
+    return { 
+      'background': `linear-gradient(0deg, rgba(0,0,0,1) 5%, rgba(0,0,0,0.45) 92%) center center no-repeat, #fff
+                        url(${tmdbConfig.secure_base_url}original${backdropUrl}) center top no-repeat` 
+    };
   }
 
   handleShareButton(): void {
