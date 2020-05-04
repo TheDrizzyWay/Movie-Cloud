@@ -5,6 +5,17 @@
             <svg backButton class="item-details-header-info-nav__icon wow fadeInLeft" data-wow-delay=".2s" data-wow-duration="2s" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M217.9 256L345 129c9.4-9.4 9.4-24.6 0-33.9-9.4-9.4-24.6-9.3-34 0L167 239c-9.1 9.1-9.3 23.7-.7 33.1L310.9 417c4.7 4.7 10.9 7 17 7s12.3-2.3 17-7c9.4-9.4 9.4-24.6 0-33.9L217.9 256z"/></svg>
             <svg (click)="handleShareButton()" class="item-details-header-info-nav__icon wow fadeInLeft" data-wow-delay=".5s" data-wow-duration="2s" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M448 248L288 96v85.334C138.666 202.667 85.333 309.334 64 416c53.333-74.666 117.333-108.802 224-108.802v87.469L448 248z"/></svg>
         </div>
+
+        <div class="item-details-header-info-share-buttons item-details-header-info-share-buttons__hide">
+            <!--change url later-->
+            <a (click)="handleShareButton()" href="{{ 'mailto:?Subject=Simple Share Buttons&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20 localhost:4200/' + itemType + '/' + details?.id }}"><img src="https://simplesharebuttons.com/images/somacro/email.png" alt="Email" /></a>
+            <a (click)="handleShareButton()" href="{{ 'http://www.facebook.com/sharer.php?u=localhost:4200/' + itemType + '/' + details?.id }}" rel="noopener noreferrer" target="_blank"><img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" /></a>
+            <a (click)="handleShareButton()" href="{{ 'https://plus.google.com/share?url=localhost:4200/' + itemType + '/' + details?.id }}" rel="noopener noreferrer" target="_blank"><img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" /></a>
+            <a (click)="handleShareButton()" href="{{ 'http://reddit.com/submit?url=localhost:4200/' + itemType + '/' + details?.id + '&amp;title=Movie Cloud' }}" rel="noopener noreferrer" target="_blank"><img src="https://simplesharebuttons.com/images/somacro/reddit.png" alt="Reddit" /></a>
+            <a (click)="handleShareButton()" href="{{ 'http://www.tumblr.com/share/link?url=localhost:4200/' + itemType + '/' + details?.id + '&amp;title=Movie Cloud' }}" rel="noopener noreferrer" target="_blank"><img src="https://simplesharebuttons.com/images/somacro/tumblr.png" alt="Tumblr" /></a>
+            <a (click)="handleShareButton()" href="{{ 'https://twitter.com/share?url=localhost:4200/' + itemType + '/' + details?.id + '&amp;text=Movie%20Cloud%20&amp;hashtags=moviecloud' }}" rel="noopener noreferrer" target="_blank"><img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" /></a>
+    
+        </div>
     </header>
 
 </div>
