@@ -44,11 +44,11 @@ export class HomeHeaderComponent implements OnChanges {
   }
 
   // Compare the item genres with the genre list and returns genre names
-  handleGetGenre(genreId: number[]): string {
+  handleGetGenre(genreIds: number[]): string {
     let mainGenre: string;
     if (this.genres) {
       this.genres.forEach(genre => {
-        if (parseInt(genre.id) == genreId[0]) {
+        if (parseInt(genre.id) == genreIds[0]) {
           mainGenre = genre.name;
         }
       });

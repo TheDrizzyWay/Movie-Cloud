@@ -32,4 +32,8 @@ export class AccountService {
   getTvRated(accountId: number, sessionId: string): Observable<TvShowInterface> {
     return this.http.get<any>(`${this.baseUrl}/${accountId}/rated/tv?api_key=${this.apiKey}&session_id=${sessionId}&language=en-US&sort_by=created_at.asc&page=1`);
   }
+
+  setFavourite() {
+    
+  }
 }

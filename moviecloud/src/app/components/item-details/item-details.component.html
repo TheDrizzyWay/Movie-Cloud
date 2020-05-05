@@ -16,6 +16,48 @@
             <a (click)="handleShareButton()" href="{{ 'https://twitter.com/share?url=localhost:4200/' + itemType + '/' + details?.id + '&amp;text=Movie%20Cloud%20&amp;hashtags=moviecloud' }}" rel="noopener noreferrer" target="_blank"><img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" /></a>
     
         </div>
+
+        <div *ngIf="itemType == 'people';else movieHeader" class="item-details-header-info-container">
+            <img class="item-details-header-info-container-image" src="{{ tmdb.secure_base_url + tmdb.poster_sizes[0] + peopleDetails?.profile_path }}" alt="{{ peopleDetails?.name }}" />
+
+            <div class="item-details-header-info-container-content">
+              <h1 class="item-details-header-info-container-content__title">{{ peopleDetails?.name }}</h1>
+
+              <div class="item-details-header-info-container-content-rating">
+                <p class="item-details-header-info-container-content-rating__digit">{{ peopleDetails ? roundUp(peopleDetails.popularity) : '' }}</p>
+                <!-- <StarRating class="item-details-header-info-container-content-rating__stars" rating={this.props.peopleDetails ? this.props.peopleDetails.popularity : ''}  itemType="people" itemId={this.props.peopleDetails.id} /> -->
+              </div>
+
+              <p class="item-details-header-info-container-content__detail">{{ peopleDetails?.gender === 1 ? 'Female' : 'Male' }} | {{ peopleDetails?.known_for_department }}</p>
+              <p class="item-details-header-info-container-content__genre">{{ peopleDetails?.birthday ? formatYearOfBirth(peopleDetails.birthday) + ' | ' + findAge(peopleDetails.birthday) + ' yo' : '' }}</p>
+
+            </div>
+        </div>
+
     </header>
 
 </div>
+
+<ng-template #movieHeader>
+    <div class="item-details-header-info-container">
+        <img class="item-details-header-info-container-image" src="{{ tmdb.secure_base_url +  tmdb.poster_sizes[0] + details?.poster_path }}" alt="{{ details?.title }}" />
+
+        <div class="item-details-header-info-container-content">
+          <h1 class="item-details-header-info-container-content__title">{{ details?.title }}</h1>
+
+          <div class="item-details-header-info-container-content-rating">
+            <p class="item-details-header-info-container-content-rating__digit">{{ details?.vote_average }}</p>
+            <!-- <StarRating class="item-details-header-info-container-content-rating__stars" rating={this.props.TVDetails ? this.props.TVDetails.vote_average : ''}  itemType="tv" itemId={this.props.TVDetails.id} /> -->
+          </div>
+
+          <p class="item-details-header-info-container-content__detail">{{ details?.status }} | {{ details?.original_language.toUpperCase() }}</p>
+          <p class="item-details-header-info-container-content__genre">{{ details?.genres ? details.genres[0].name : '' }} {{ details?.genres ? ' | ' + details.genres[1].name : '' }}</p>
+
+          <svg (click)="handleFavoriteItem($event, details.id)" class="item-details-header-info-container-content__favorite" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 448l-30.164-27.211C118.718 322.442 48 258.61 48 179.095 48 114.221 97.918 64 162.4 64c36.399 0 70.717 16.742 93.6 43.947C278.882 80.742 313.199 64 349.6 64 414.082 64 464 114.221 464 179.095c0 79.516-70.719 143.348-177.836 241.694L256 448z"/></svg>
+
+          <div class="item-details-header-info-container-account-warning item-details-header-info-container-account-warning--hide">
+            <p>You need a TDMB account to use this feature</p>
+          </div>
+        </div>
+    </div>
+</ng-template>
