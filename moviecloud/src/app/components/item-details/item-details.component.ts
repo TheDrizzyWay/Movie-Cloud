@@ -78,10 +78,15 @@ export class ItemDetailsComponent implements OnInit {
     return Math.round(popularity);
   }
 
-  handleFavoriteItem(event: Event, itemId: string) {
+  handleFavoriteItem(target: EventTarget, itemId: string) {
     if(this.sessionData && this.sessionData.session_id) {
-      console.log('logged in');
-      
+      const requestBody = {
+        media_type: this.itemType,
+        media_id: itemId,
+        favorite: !(<SVGElement>target).closest('.item-details-header-info-container-content__favorite').classList.value.includes('--active')
+      };
+
+      this.account.setFavourite(this.userDetails.id, this.sessionData.session_id, requestBody).subscribe();
     } else {
       document.querySelector('.item-details-header-info-container-account-warning').classList.remove('item-details-header-info-container-account-warning--hide');
       setTimeout(() => {

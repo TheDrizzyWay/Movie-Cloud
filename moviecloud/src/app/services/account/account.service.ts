@@ -33,7 +33,7 @@ export class AccountService {
     return this.http.get<any>(`${this.baseUrl}/${accountId}/rated/tv?api_key=${this.apiKey}&session_id=${sessionId}&language=en-US&sort_by=created_at.asc&page=1`);
   }
 
-  setFavourite() {
-    
+  setFavourite(accountId: number, sessionId: string, requestBody: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/${accountId}/favorite?api_key=${this.apiKey}&session_id=${sessionId}`, requestBody);
   }
 }

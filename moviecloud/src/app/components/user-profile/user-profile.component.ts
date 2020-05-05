@@ -49,24 +49,27 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    if(this.status == 'approved' && !this.sessionData) {
-      this.auth.getUserSession(this.requestToken).subscribe(res => {
-        if(res.success) {
-          this.auth.saveSession(res);
-          this.sessionData = res;
-        }
+    if(this.status == 'approved') {
+      if(!this.sessionData) {
+        this.auth.getUserSession(this.requestToken).subscribe(res => {
+          if(res.success) {
+            this.auth.saveSession(res);
+            this.sessionData = res;
 
-        if(this.sessionData && this.sessionData.session_id) {
-          this.auth.getUserDetails(this.sessionData.session_id).subscribe(res => {
-            if(res.id) {
-              this.auth.saveUser(res);
-              this.userDetails = res;
-              this.handleFavorites();
-              this.handleRated();
-            }
-          });
-        }
-      });
+            this.auth.getUserDetails(this.sessionData.session_id).subscribe(res => {
+              if(res.id) {
+                this.auth.saveUser(res);
+                this.userDetails = res;
+                this.handleFavorites();
+                this.handleRated();
+              }
+            });
+          }
+        });
+      } else {
+        this.handleFavorites();
+        this.handleRated();
+      }
     }
 
     this.movieSubscription = this.global.getEntity('movie_genre').subscribe(res => {
