@@ -25,7 +25,7 @@
 
               <div class="item-details-header-info-container-content-rating">
                 <p class="item-details-header-info-container-content-rating__digit">{{ peopleDetails ? roundUp(peopleDetails.popularity) : '' }}</p>
-                <!-- <StarRating class="item-details-header-info-container-content-rating__stars" rating={this.props.peopleDetails ? this.props.peopleDetails.popularity : ''}  itemType="people" itemId={this.props.peopleDetails.id} /> -->
+                <app-star-rating class="item-details-header-info-container-content-rating__stars" rating="{{ peopleDetails ? peopleDetails.popularity : '' }}" itemType="people" itemId="peopleDetails?.id"></app-star-rating>
               </div>
 
               <p class="item-details-header-info-container-content__detail">{{ peopleDetails?.gender === 1 ? 'Female' : 'Male' }} | {{ peopleDetails?.known_for_department }}</p>
@@ -47,7 +47,7 @@
 
           <div class="item-details-header-info-container-content-rating">
             <p class="item-details-header-info-container-content-rating__digit">{{ details?.vote_average }}</p>
-            <!-- <StarRating class="item-details-header-info-container-content-rating__stars" rating={this.props.TVDetails ? this.props.TVDetails.vote_average : ''}  itemType="tv" itemId={this.props.TVDetails.id} /> -->
+            <app-star-rating class="item-details-header-info-container-content-rating__stars" rating="{{ details?.vote_average }}" itemType="itemType" itemId="details.id"></app-star-rating>
           </div>
 
           <p class="item-details-header-info-container-content__detail">{{ details?.status }} | {{ details?.original_language.toUpperCase() }}</p>

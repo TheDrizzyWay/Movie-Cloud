@@ -18,6 +18,7 @@ import { MainNavComponent } from './components/main-nav/main-nav.component';
 import { HomeHeaderComponent } from './components/home-header/home-header.component';
 import { ItemCarouselComponent } from './components/item-carousel/item-carousel.component';
 import { BackButtonDirective } from './shared/back-button/back-button.directive';
+import { StarRatingComponent } from './components/star-rating/star-rating.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { BackButtonDirective } from './shared/back-button/back-button.directive'
     MainNavComponent,
     HomeHeaderComponent,
     ItemCarouselComponent,
-    BackButtonDirective
+    BackButtonDirective,
+    StarRatingComponent
   ],
   imports: [
     BrowserModule,
