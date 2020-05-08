@@ -33,7 +33,7 @@ export class ItemDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private detailsService: DetailsService,
+    //private detailsService: DetailsService,
     private creditsService: CreditsService,
     private trailerService: TrailerService,
     private reviewService: ReviewService,
@@ -46,6 +46,7 @@ export class ItemDetailsComponent implements OnInit {
     }
 
   ngOnInit() {
+    this.details = this.route.snapshot.data.details;
     this.route.paramMap.subscribe(res => {
       this.itemType = res.get('type');
       this.fetchData(res.get('id'), this.itemType);
@@ -57,7 +58,7 @@ export class ItemDetailsComponent implements OnInit {
       this.discover.getPeopleDetails(id).subscribe(res => this.peopleDetails = res);
       this.discover.getPeopleCombinedCredits(id).subscribe(res => this.combinedCredits = res);
     } else {
-      this.detailsService.getOne(itemType, id).subscribe(res => this.details = res);
+      //this.detailsService.getOne(itemType, id).subscribe(res => this.details = res);
       this.creditsService.getOne(itemType, id).subscribe(res => this.credits = res);
       this.trailerService.getOne(itemType, id).subscribe(res => this.trailers = res);
       this.reviewService.getOne(itemType, id).subscribe(res => this.reviews = res);
