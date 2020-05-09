@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { tmdbConfig } from '@app/utils/constants';
-import { DetailsService, CreditsService, TrailerService, ReviewService } from '@app/services/movies/movie.service';
+import { TrailerService, ReviewService } from '@app/services/movies/movie.service';
 import { Details } from '@app/models/Details';
 import { Credit } from '@app/models/Credit';
 import { Trailer } from '@app/models/Trailer';
@@ -33,8 +33,6 @@ export class ItemDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    //private detailsService: DetailsService,
-    private creditsService: CreditsService,
     private trailerService: TrailerService,
     private reviewService: ReviewService,
     private discover: DiscoverService,
@@ -47,6 +45,7 @@ export class ItemDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.details = this.route.snapshot.data.details;
+    this.credits = this.route.snapshot.data.credits;
     this.route.paramMap.subscribe(res => {
       this.itemType = res.get('type');
       this.fetchData(res.get('id'), this.itemType);
@@ -58,8 +57,6 @@ export class ItemDetailsComponent implements OnInit {
       this.discover.getPeopleDetails(id).subscribe(res => this.peopleDetails = res);
       this.discover.getPeopleCombinedCredits(id).subscribe(res => this.combinedCredits = res);
     } else {
-      //this.detailsService.getOne(itemType, id).subscribe(res => this.details = res);
-      this.creditsService.getOne(itemType, id).subscribe(res => this.credits = res);
       this.trailerService.getOne(itemType, id).subscribe(res => this.trailers = res);
       this.reviewService.getOne(itemType, id).subscribe(res => this.reviews = res);
     }
