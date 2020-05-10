@@ -1,4 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AuthService } from '@app/services/auth/auth.service';
+import { GuestToken, SessionToken } from '@app/models/AuthResponses';
+import { AccountService } from '@app/services/account/account.service';
 
 @Component({
   selector: 'app-star-rating',
@@ -9,14 +12,20 @@ export class StarRatingComponent implements OnInit {
   @Input() rating: number;
   @Input() itemType: string;
   @Input() itemId: string;
+  sessionData: GuestToken | SessionToken;;
 
-  constructor() { }
+  constructor(
+    private auth: AuthService,
+    private account: AccountService
+    ) {
+    this.sessionData = this.auth.getSession();
+   }
 
   ngOnInit() {
     this.setRating(this.rating);
   }
 
-  setRating(ratingValue: number) {
+  setRating(ratingValue: number): void {
     let ratingRounded = Math.round(ratingValue / 2);
 
     document.querySelectorAll('.star-rating-container__item').forEach((node, i) => {
@@ -27,7 +36,7 @@ export class StarRatingComponent implements OnInit {
   }
 
   // Removes all active stars and sets new active stars up to where the user clicked
-  activateStar(target: EventTarget) {
+  activateStar(target: EventTarget): void {
     const nodes = (<HTMLDivElement>target).closest(".star-rating-container__item").parentNode.childNodes as NodeListOf<HTMLElement>;
 
     nodes.forEach(node => {
@@ -44,35 +53,26 @@ export class StarRatingComponent implements OnInit {
   }
 
   postRating(target: EventTarget) {
+    if (this.sessionData) {
+      const ratingValue = document.querySelectorAll('.star-rating-container__item__active').length * 2;
 
-    // if (logInStatus === 'GUEST') {
-    //   this.activateStar(target);
-    //   const rating = document.querySelectorAll('.star-rating-container__item__active').length * 2;
+      if(this.sessionData.guest_session_id) {
+        console.log('guest things');
+        
+        this.activateStar(target);
+        this.account.guestRating(this.itemType, this.itemId, this.sessionData.guest_session_id, ratingValue).subscribe();
+      } else {
+        this.activateStar(target);
+        this.account.userRating(this.itemType, this.itemId, this.sessionData.session_id, ratingValue).subscribe();
+      }
 
-    //   if (itemType === 'movies') {
-    //     this.props.rateMovie(`https://api.themoviedb.org/3/movie/${itemId}/rating?api_key=${apiKey}&guest_session_id=${sessionId}`, rating);
-    //   } else if (itemType === 'tv') {
-    //     this.props.rateMovie(`https://api.themoviedb.org/3/tv/${itemId}/rating?api_key=${apiKey}&guest_session_id=${sessionId}`, rating);
-    //   }
-
-    // } else if (logInStatus === 'APPROVED') {
-    //   this.activateStar(target);
-    //   const rating = document.querySelectorAll('.star-rating-container__item__active').length * 2;
-
-    //     if (itemType === 'movies') {
-    //       this.props.rateMovie(`https://api.themoviedb.org/3/movie/${itemId}/rating?api_key=${apiKey}&session_id=${sessionId}`, rating);
-    //     } else if (itemType === 'tv') {
-    //       this.props.rateMovie(`https://api.themoviedb.org/3/tv/${itemId}/rating?api_key=${apiKey}&session_id=${sessionId}`, rating);
-    //     }
-
-    //     // Activates popup telling user to sign in
-    // } else {
-    //   document.querySelector('.star-rating-container-warning').classList.remove('star-rating-container-warning--hide');
-    //   setTimeout(() => {
-    //     document.querySelector('.star-rating-container-warning').classList.add('star-rating-container-warning--hide');
-    //   }, 3000);
-    // }
-
+    } else {
+      // Activates popup telling user to sign in
+      document.querySelector('.star-rating-container-warning').classList.remove('star-rating-container-warning--hide');
+      setTimeout(() => {
+        document.querySelector('.star-rating-container-warning').classList.add('star-rating-container-warning--hide');
+      }, 3000);
+    }
   }
 
 }

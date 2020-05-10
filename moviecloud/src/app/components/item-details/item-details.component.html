@@ -25,7 +25,7 @@
 
               <div class="item-details-header-info-container-content-rating">
                 <p class="item-details-header-info-container-content-rating__digit">{{ peopleDetails ? roundUp(peopleDetails.popularity) : '' }}</p>
-                <app-star-rating class="item-details-header-info-container-content-rating__stars" rating="{{ peopleDetails ? peopleDetails.popularity : '' }}" itemType="people" itemId="peopleDetails?.id"></app-star-rating>
+                <app-star-rating class="item-details-header-info-container-content-rating__stars" rating="{{ peopleDetails ? peopleDetails.popularity : '' }}" itemType="people" itemId="{{ peopleDetails?.id }}"></app-star-rating>
               </div>
 
               <p class="item-details-header-info-container-content__detail">{{ peopleDetails?.gender === 1 ? 'Female' : 'Male' }} | {{ peopleDetails?.known_for_department }}</p>
@@ -47,11 +47,11 @@
 
           <div class="item-details-header-info-container-content-rating">
             <p class="item-details-header-info-container-content-rating__digit">{{ details?.vote_average }}</p>
-            <app-star-rating class="item-details-header-info-container-content-rating__stars" rating="{{ details?.vote_average }}" itemType="itemType" itemId="details.id"></app-star-rating>
+            <app-star-rating class="item-details-header-info-container-content-rating__stars" rating="{{ details?.vote_average }}" itemType="{{ itemType }}" itemId="{{ details.id }}"></app-star-rating>
           </div>
 
           <p class="item-details-header-info-container-content__detail">{{ details?.status }} | {{ details?.original_language.toUpperCase() }}</p>
-          <p class="item-details-header-info-container-content__genre">{{ details?.genres ? details.genres[0].name : '' }} {{ details?.genres ? ' | ' + details.genres[1].name : '' }}</p>
+          <p class="item-details-header-info-container-content__genre">{{ details?.genres[0] ? details.genres[0].name : '' }} {{ details?.genres[1] ? ' | ' + details.genres[1].name : '' }}</p>
 
           <svg (click)="handleFavoriteItem($event.target, details.id)" class="item-details-header-info-container-content__favorite" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 448l-30.164-27.211C118.718 322.442 48 258.61 48 179.095 48 114.221 97.918 64 162.4 64c36.399 0 70.717 16.742 93.6 43.947C278.882 80.742 313.199 64 349.6 64 414.082 64 464 114.221 464 179.095c0 79.516-70.719 143.348-177.836 241.694L256 448z"/></svg>
 

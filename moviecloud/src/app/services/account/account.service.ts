@@ -36,4 +36,12 @@ export class AccountService {
   setFavourite(accountId: number, sessionId: string, requestBody: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/${accountId}/favorite?api_key=${this.apiKey}&session_id=${sessionId}`, requestBody);
   }
+
+  guestRating(itemType: string, itemId: string, sessionId: string, rating: number) {
+    return this.http.post<any>(`https://api.themoviedb.org/3/${itemType}/${itemId}/rating?api_key=${this.apiKey}&guest_session_id=${sessionId}`, { value: rating });
+  }
+
+  userRating(itemType: string, itemId: string, sessionId: string, rating: number) {
+    return this.http.post<any>(`https://api.themoviedb.org/3/${itemType}/${itemId}/rating?api_key=${this.apiKey}&session_id=${sessionId}`, { value: rating });
+  }
 }
