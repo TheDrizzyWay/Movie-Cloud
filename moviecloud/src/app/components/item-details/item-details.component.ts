@@ -54,7 +54,7 @@ export class ItemDetailsComponent implements OnInit {
 
   fetchData(id: string, itemType: string) {
     if(itemType == 'people') {
-      this.discover.getPeopleDetails(id).subscribe(res => this.peopleDetails = res);
+      this.discover.getPeopleDetails(Number(id)).subscribe(res => this.peopleDetails = res);
       this.discover.getPeopleCombinedCredits(id).subscribe(res => this.combinedCredits = res);
     } else {
       this.trailerService.getOne(itemType, id).subscribe(res => this.trailers = res);
@@ -74,6 +74,12 @@ export class ItemDetailsComponent implements OnInit {
 
   roundUp(popularity: number): number {
     return Math.round(popularity);
+  }
+
+  // Takes string and shortens it to 50 words
+  shortText = (str: string, length = 50) => {
+    const strArr = str.split(' ');
+    return strArr.length < length ? str : strArr.filter((word, i) => i < length).join(' ') + '...';
   }
 
   handleFavoriteItem(target: EventTarget, itemId: string) {

@@ -36,6 +36,17 @@
 
     </header>
 
+    <main class="item-details-main">
+
+      <div *ngIf="itemType == 'people';else movieSummary" class="item-details-main-summary">
+        <h2 class="item-details-main-summary__title wow fadeInLeft" data-wow-delay=".2s" data-wow-duration="1s">Biography</h2>
+        <p class="item-details-main-summary__content">{{ peopleDetails?.biography ? shortText(peopleDetails.biography, 100) : '' }}</p>
+      </div>
+
+    </main>
+
+    <app-loader></app-loader>
+
 </div>
 
 <ng-template #movieHeader>
@@ -60,4 +71,11 @@
           </div>
         </div>
     </div>
+</ng-template>
+
+<ng-template #movieSummary>
+  <div class="item-details-main-summary">
+    <h2 class="item-details-main-summary__title wow fadeInLeft" data-wow-delay=".2s" data-wow-duration="1s">Summary</h2>
+    <p class="item-details-main-summary__content">{{ details?.overview.length > 0 ? details.overview : 'Overview not found' }}</p>
+  </div>
 </ng-template>

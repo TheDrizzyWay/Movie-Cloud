@@ -32,7 +32,7 @@ export class DiscoverService {
     .pipe(map(res => res.results));
   }
 
-  getPeopleDetails(id: string): Observable<PeopleDetails> {
+  getPeopleDetails(id: number): Observable<PeopleDetails> {
     return this.http.get<any>(`https://api.themoviedb.org/3/person/${id}?api_key=${this.apiKey}&language=en-US`);
   }
 

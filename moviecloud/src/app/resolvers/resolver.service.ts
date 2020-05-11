@@ -15,6 +15,8 @@ export class ResolverService<T, S extends GenericService<T>> implements Resolve<
   resolve(route: ActivatedRouteSnapshot): Observable<T> {
     this.itemType = route.paramMap.get('type');
     this.id = route.paramMap.get('id');
-    return this.service.getOne(this.itemType, this.id);
+    if(this.itemType !== 'people') {
+      return this.service.getOne(this.itemType, this.id);
+    }
   }
 }
