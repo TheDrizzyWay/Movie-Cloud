@@ -1,19 +1,20 @@
 <div class="people-carousel-container">
-    <div *ngIf="people.length > 0; else noCast" class="swiper-container">
+    <div *ngIf="cast.length > 0; else noCast" class="swiper-container" [swiper]="config">
 
         <div class="swiper-wrapper">
-                <div *ngFor="let person of slides" class="swiper-slide">
-                  <a [routerLink]="['/details/people', person.id]">
+            <div *ngFor="let person of slides" class="swiper-slide">
+                <a [routerLink]="['/details/people', person.id]">
                     <img class="swiper-slide__image" src="{{ person.profile_path ? tmdb.secure_base_url + tmdb.profile_sizes[1] + person.profile_path : '../../../../../assets/images/backup.jpg' }}" alt="{{ person.name }}" />
                     <h3 class="swiper-slide__title">{{ person.name }}</h3>
-                  </a>
-                </div>
+                </a>
+            </div>
         </div>
 
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
    </div>
+</div>
 
-  <ng-template #noCast>
+<ng-template #noCast>
     <p class="people-carousel-container-error">No cast found :(</p>
-  </ng-template>
+</ng-template>

@@ -45,7 +45,7 @@
 
       <div *ngIf="itemType != 'people'" class="item-details-main-cast">
         <h2 class="item-details-main-cast__title wow fadeInLeft" data-wow-delay=".2s" data-wow-duration="1s">Cast</h2>
-        <!-- <PeopleCarousel backdropUrl={this.props.movieDetails ? this.props.movieDetails.backdrop_path : ''} MDBConfig={this.props.MDBConfig} people={this.props.movieCredits.cast ? this.props.movieCredits.cast : ''} /> -->
+        <app-people-carousel [cast]="credits?.cast"></app-people-carousel>
       </div>
 
     </main>

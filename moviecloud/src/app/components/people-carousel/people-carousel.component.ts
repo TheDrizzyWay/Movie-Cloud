@@ -17,7 +17,6 @@ export class PeopleCarouselComponent implements OnInit {
 
   constructor() {
     this.config = {
-      init: true,
       slidesPerView: 5,
       loop: true,
       spaceBetween: 30,
@@ -30,11 +29,11 @@ export class PeopleCarouselComponent implements OnInit {
           slidesPerView: 3
         },
       },
+      navigation: true,
       pagination: {
         el: '.swiper-pagination',
         clickable: true
       },
-      navigation: true,
       slideNextClass: '.swiper-button-next',
       slidePrevClass: '.swiper-button-prev'
     };
