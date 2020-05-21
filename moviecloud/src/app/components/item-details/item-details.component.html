@@ -1,40 +1,40 @@
 <div class="item-details" id="item-details-top">
 
-    <header class="item-details-header-info" [ngStyle]="styleBackground()">
-        <div class="item-details-header-info-nav">
-            <svg backButton class="item-details-header-info-nav__icon wow fadeInLeft" data-wow-delay=".2s" data-wow-duration="2s" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M217.9 256L345 129c9.4-9.4 9.4-24.6 0-33.9-9.4-9.4-24.6-9.3-34 0L167 239c-9.1 9.1-9.3 23.7-.7 33.1L310.9 417c4.7 4.7 10.9 7 17 7s12.3-2.3 17-7c9.4-9.4 9.4-24.6 0-33.9L217.9 256z"/></svg>
-            <svg (click)="handleShareButton()" class="item-details-header-info-nav__icon wow fadeInLeft" data-wow-delay=".5s" data-wow-duration="2s" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M448 248L288 96v85.334C138.666 202.667 85.333 309.334 64 416c53.333-74.666 117.333-108.802 224-108.802v87.469L448 248z"/></svg>
+  <header class="item-details-header-info" [ngStyle]="styleBackground()">
+    <div class="item-details-header-info-nav">
+      <svg backButton class="item-details-header-info-nav__icon wow fadeInLeft" data-wow-delay=".2s" data-wow-duration="2s" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M217.9 256L345 129c9.4-9.4 9.4-24.6 0-33.9-9.4-9.4-24.6-9.3-34 0L167 239c-9.1 9.1-9.3 23.7-.7 33.1L310.9 417c4.7 4.7 10.9 7 17 7s12.3-2.3 17-7c9.4-9.4 9.4-24.6 0-33.9L217.9 256z"/></svg>
+      <svg (click)="handleShareButton()" class="item-details-header-info-nav__icon wow fadeInLeft" data-wow-delay=".5s" data-wow-duration="2s" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M448 248L288 96v85.334C138.666 202.667 85.333 309.334 64 416c53.333-74.666 117.333-108.802 224-108.802v87.469L448 248z"/></svg>
+    </div>
+
+    <div class="item-details-header-info-share-buttons item-details-header-info-share-buttons__hide">
+      <!--change url later-->
+      <a (click)="handleShareButton()" href="{{ 'mailto:?Subject=Simple Share Buttons&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20 localhost:4200/' + itemType + '/' + details?.id }}"><img src="https://simplesharebuttons.com/images/somacro/email.png" alt="Email" /></a>
+      <a (click)="handleShareButton()" href="{{ 'http://www.facebook.com/sharer.php?u=localhost:4200/' + itemType + '/' + details?.id }}" rel="noopener noreferrer" target="_blank"><img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" /></a>
+      <a (click)="handleShareButton()" href="{{ 'https://plus.google.com/share?url=localhost:4200/' + itemType + '/' + details?.id }}" rel="noopener noreferrer" target="_blank"><img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" /></a>
+      <a (click)="handleShareButton()" href="{{ 'http://reddit.com/submit?url=localhost:4200/' + itemType + '/' + details?.id + '&amp;title=Movie Cloud' }}" rel="noopener noreferrer" target="_blank"><img src="https://simplesharebuttons.com/images/somacro/reddit.png" alt="Reddit" /></a>
+      <a (click)="handleShareButton()" href="{{ 'http://www.tumblr.com/share/link?url=localhost:4200/' + itemType + '/' + details?.id + '&amp;title=Movie Cloud' }}" rel="noopener noreferrer" target="_blank"><img src="https://simplesharebuttons.com/images/somacro/tumblr.png" alt="Tumblr" /></a>
+      <a (click)="handleShareButton()" href="{{ 'https://twitter.com/share?url=localhost:4200/' + itemType + '/' + details?.id + '&amp;text=Movie%20Cloud%20&amp;hashtags=moviecloud' }}" rel="noopener noreferrer" target="_blank"><img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" /></a>
+
+    </div>
+
+    <div *ngIf="itemType == 'people';else movieHeader" class="item-details-header-info-container">
+      <img class="item-details-header-info-container-image" src="{{ tmdb.secure_base_url + tmdb.poster_sizes[0] + peopleDetails?.profile_path }}" alt="{{ peopleDetails?.name }}" />
+
+      <div class="item-details-header-info-container-content">
+        <h1 class="item-details-header-info-container-content__title">{{ peopleDetails?.name }}</h1>
+
+        <div class="item-details-header-info-container-content-rating">
+          <p class="item-details-header-info-container-content-rating__digit">{{ peopleDetails ? roundUp(peopleDetails.popularity) : '' }}</p>
+          <app-star-rating class="item-details-header-info-container-content-rating__stars" rating="{{ peopleDetails ? peopleDetails.popularity : '' }}" itemType="people" itemId="{{ peopleDetails?.id }}"></app-star-rating>
         </div>
 
-        <div class="item-details-header-info-share-buttons item-details-header-info-share-buttons__hide">
-            <!--change url later-->
-            <a (click)="handleShareButton()" href="{{ 'mailto:?Subject=Simple Share Buttons&amp;Body=I%20saw%20this%20and%20thought%20of%20you!%20 localhost:4200/' + itemType + '/' + details?.id }}"><img src="https://simplesharebuttons.com/images/somacro/email.png" alt="Email" /></a>
-            <a (click)="handleShareButton()" href="{{ 'http://www.facebook.com/sharer.php?u=localhost:4200/' + itemType + '/' + details?.id }}" rel="noopener noreferrer" target="_blank"><img src="https://simplesharebuttons.com/images/somacro/facebook.png" alt="Facebook" /></a>
-            <a (click)="handleShareButton()" href="{{ 'https://plus.google.com/share?url=localhost:4200/' + itemType + '/' + details?.id }}" rel="noopener noreferrer" target="_blank"><img src="https://simplesharebuttons.com/images/somacro/google.png" alt="Google" /></a>
-            <a (click)="handleShareButton()" href="{{ 'http://reddit.com/submit?url=localhost:4200/' + itemType + '/' + details?.id + '&amp;title=Movie Cloud' }}" rel="noopener noreferrer" target="_blank"><img src="https://simplesharebuttons.com/images/somacro/reddit.png" alt="Reddit" /></a>
-            <a (click)="handleShareButton()" href="{{ 'http://www.tumblr.com/share/link?url=localhost:4200/' + itemType + '/' + details?.id + '&amp;title=Movie Cloud' }}" rel="noopener noreferrer" target="_blank"><img src="https://simplesharebuttons.com/images/somacro/tumblr.png" alt="Tumblr" /></a>
-            <a (click)="handleShareButton()" href="{{ 'https://twitter.com/share?url=localhost:4200/' + itemType + '/' + details?.id + '&amp;text=Movie%20Cloud%20&amp;hashtags=moviecloud' }}" rel="noopener noreferrer" target="_blank"><img src="https://simplesharebuttons.com/images/somacro/twitter.png" alt="Twitter" /></a>
-    
-        </div>
+        <p class="item-details-header-info-container-content__detail">{{ peopleDetails?.gender === 1 ? 'Female' : 'Male' }} | {{ peopleDetails?.known_for_department }}</p>
+        <p class="item-details-header-info-container-content__genre">{{ peopleDetails?.birthday ? formatYearOfBirth(peopleDetails.birthday) + ' | ' + findAge(peopleDetails.birthday) + ' yo' : '' }}</p>
 
-        <div *ngIf="itemType == 'people';else movieHeader" class="item-details-header-info-container">
-            <img class="item-details-header-info-container-image" src="{{ tmdb.secure_base_url + tmdb.poster_sizes[0] + peopleDetails?.profile_path }}" alt="{{ peopleDetails?.name }}" />
+      </div>
+    </div>
 
-            <div class="item-details-header-info-container-content">
-              <h1 class="item-details-header-info-container-content__title">{{ peopleDetails?.name }}</h1>
-
-              <div class="item-details-header-info-container-content-rating">
-                <p class="item-details-header-info-container-content-rating__digit">{{ peopleDetails ? roundUp(peopleDetails.popularity) : '' }}</p>
-                <app-star-rating class="item-details-header-info-container-content-rating__stars" rating="{{ peopleDetails ? peopleDetails.popularity : '' }}" itemType="people" itemId="{{ peopleDetails?.id }}"></app-star-rating>
-              </div>
-
-              <p class="item-details-header-info-container-content__detail">{{ peopleDetails?.gender === 1 ? 'Female' : 'Male' }} | {{ peopleDetails?.known_for_department }}</p>
-              <p class="item-details-header-info-container-content__genre">{{ peopleDetails?.birthday ? formatYearOfBirth(peopleDetails.birthday) + ' | ' + findAge(peopleDetails.birthday) + ' yo' : '' }}</p>
-
-            </div>
-        </div>
-
-    </header>
+  </header>
 
     <main class="item-details-main">
 
@@ -51,7 +51,7 @@
       <div *ngIf="itemType != 'people'" class="item-details-main-trailers">
         <ng-container *ngIf="trailers.results.length > 0;else noTrailers">
           <h2 class="item-details-main-trailers__title wow fadeInLeft" data-wow-delay=".2s" data-wow-duration="1s">Trailers</h2>
-          <!-- <TrailerCarousel movieTrailers={this.props.movieTrailers} /> -->
+          <app-trailer-carousel [trailers]="trailers.results"></app-trailer-carousel>
         </ng-container>
       </div>
 

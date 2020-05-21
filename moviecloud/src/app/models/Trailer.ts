@@ -1,4 +1,4 @@
-interface Result {
+export interface TrailerResult {
         id: string;
         iso_639_1: string;
         iso_3166_1: string;
@@ -11,5 +11,5 @@ interface Result {
 
 export interface Trailer {
         id: number;
-        results: Result[];
+        results: TrailerResult[];
     }

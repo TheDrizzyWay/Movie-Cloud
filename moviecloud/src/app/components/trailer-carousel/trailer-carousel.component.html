@@ -1,0 +1,15 @@
+<div class="trailer-carousel">
+    <div class="trailer-swiper-container" [swiper]="config">
+
+      <div class="swiper-wrapper">
+
+        <div *ngFor="let trailer of trailers" class="swiper-slide">
+           <iframe title="1" width="420" height="315" [src]="cleanUrl(trailer.key)"></iframe>
+        </div>
+
+      </div>
+
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+    </div>
+</div>

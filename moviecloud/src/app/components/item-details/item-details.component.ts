@@ -46,6 +46,7 @@ export class ItemDetailsComponent implements OnInit {
     this.details = this.route.snapshot.data.details;
     this.credits = this.route.snapshot.data.credits;
     this.trailers = this.route.snapshot.data.trailers;
+
     this.route.paramMap.subscribe(res => {
       this.itemType = res.get('type');
       this.fetchData(res.get('id'), this.itemType);
