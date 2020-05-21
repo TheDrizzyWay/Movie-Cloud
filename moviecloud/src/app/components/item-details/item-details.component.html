@@ -48,6 +48,13 @@
         <app-people-carousel [cast]="credits?.cast"></app-people-carousel>
       </div>
 
+      <div *ngIf="itemType != 'people'" class="item-details-main-trailers">
+        <ng-container *ngIf="trailers.results.length > 0;else noTrailers">
+          <h2 class="item-details-main-trailers__title wow fadeInLeft" data-wow-delay=".2s" data-wow-duration="1s">Trailers</h2>
+          <!-- <TrailerCarousel movieTrailers={this.props.movieTrailers} /> -->
+        </ng-container>
+      </div>
+
     </main>
 
     <app-loader></app-loader>
@@ -83,4 +90,8 @@
     <h2 class="item-details-main-summary__title wow fadeInLeft" data-wow-delay=".2s" data-wow-duration="1s">Summary</h2>
     <p class="item-details-main-summary__content">{{ details?.overview.length > 0 ? details.overview : 'Overview not found' }}</p>
   </div>
+</ng-template>
+
+<ng-template #noTrailers>
+  <h3 class="item-details-main-trailers__error">No trailers found :(</h3>
 </ng-template>

@@ -6,7 +6,7 @@ import { DiscoverComponent } from './components/discover/discover.component';
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { HomeComponent } from './components/home/home.component';
-import { DetailsResolver, CreditsResolver } from './resolvers/item-resolver.service';
+import { DetailsResolver, CreditsResolver, TrailersResolver } from './resolvers/item-resolver.service';
 
 const routes: Routes = [
   { path: 'profile/:status', component: UserProfileComponent },
@@ -18,7 +18,8 @@ const routes: Routes = [
     component: ItemDetailsComponent,
     resolve: {
       details: DetailsResolver,
-      credits: CreditsResolver
+      credits: CreditsResolver,
+      trailers: TrailersResolver
     },
   },
   { path: 'home', component: HomeComponent },
