@@ -55,6 +55,45 @@
         </ng-container>
       </div>
 
+      <div *ngIf="itemType != 'people'" class="item-details-main-reviews">
+        <h2 class="item-details-main-reviews__title wow fadeInLeft" data-wow-delay=".2s" data-wow-duration="1s">Popular Reviews</h2>
+
+        <ng-container *ngIf="reviews.results.length > 0; else noReviews">
+          <div *ngFor="let review of reviews.results" class="item-details-main-reviews-container">
+            <h3 class="item-details-main-reviews-container__author">{{ review.author }}</h3>
+            <p class="item-details-main-reviews-container__content">{{ shortText(review.content) }}</p>
+            <a class="item-details-main-reviews-container__link" href="{{ review.url }}" target="_blank">
+              <p>See full review</p>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M294.1 256L167 129c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.3 34 0L345 239c9.1 9.1 9.3 23.7.7 33.1L201.1 417c-4.7 4.7-10.9 7-17 7s-12.3-2.3-17-7c-9.4-9.4-9.4-24.6 0-33.9l127-127.1z"/></svg>
+            </a>
+          </div>
+        </ng-container>
+
+      </div>
+
+      <div *ngIf="itemType == 'people'" class="item-details-main-popular-roles">
+        <h2 class="item-details-main-popular-roles__title wow fadeInLeft" data-wow-delay=".2s" data-wow-duration="1s">Popular Roles</h2>
+
+        <ng-container *ngIf="combinedCredits.cast.length > 0; else noRoles">
+          <div *ngFor="let role of selectCast(combinedCredits.cast); index as theIndex" class="item-details-main-popular-roles-container">
+            <ng-container *ngIf="theIndex < 15">
+              <a [routerLink]="['/details', role.media_type, role.id]">
+                <header class="item-details-main-popular-roles-container-header">
+                  <img class="iitem-details-main-popular-roles-container-header-image" src="{{ tmdb.secure_base_url + tmdb.poster_sizes[0] + role.poster_path }}" alt="{{ role.title }}" />
+                  <div class="item-details-main-popular-roles-container-header-info">
+                    <h3 class="item-details-main-popular-roles-container-header-info__title">{{ role.title }}</h3>
+                    <p class="item-details-main-popular-roles-container-header-info__character">{{ role.character }}</p>
+                  </div>
+                </header>
+              </a>
+
+              <p class="item-details-main-popular-roles-container__content">{{ shortText(role.overview) }}</p>
+            </ng-container>
+
+          </div>
+        </ng-container>
+      </div>
+
     </main>
 
     <app-loader></app-loader>
@@ -94,4 +133,16 @@
 
 <ng-template #noTrailers>
   <h3 class="item-details-main-trailers__error">No trailers found :(</h3>
+</ng-template>
+
+<ng-template #noReviews>
+  <div class="item-details-main-reviews-container">
+    <p class="item-details-main-reviews-container__error">No reviews found :(</p>
+  </div>
+</ng-template>
+
+<ng-template #noRoles>
+  <div class="item-details-main-popular-roles-container">
+    <p class="item-details-main-popular-roles-container__error">No roles found :(</p>
+  </div>
 </ng-template>

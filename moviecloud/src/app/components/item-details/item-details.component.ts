@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { tmdbConfig } from '@app/utils/constants';
-import { ReviewService } from '@app/services/movies/movie.service';
 import { Details } from '@app/models/Details';
-import { Credit } from '@app/models/Credit';
+import { Credit, Cast } from '@app/models/Credit';
 import { Trailer } from '@app/models/Trailer';
 import { Review } from '@app/models/Review';
 import { DiscoverService } from '@app/services/discover/discover.service';
@@ -33,7 +32,6 @@ export class ItemDetailsComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private reviewService: ReviewService,
     private discover: DiscoverService,
     private auth: AuthService,
     private account: AccountService
@@ -46,20 +44,19 @@ export class ItemDetailsComponent implements OnInit {
     this.details = this.route.snapshot.data.details;
     this.credits = this.route.snapshot.data.credits;
     this.trailers = this.route.snapshot.data.trailers;
+    this.reviews = this.route.snapshot.data.reviews;
 
     this.route.paramMap.subscribe(res => {
       this.itemType = res.get('type');
-      this.fetchData(res.get('id'), this.itemType);
+      if(this.itemType == 'people') {
+        this.fetchData(res.get('id'));
+      }
     });
   }
 
-  fetchData(id: string, itemType: string) {
-    if(itemType == 'people') {
-      this.discover.getPeopleDetails(Number(id)).subscribe(res => this.peopleDetails = res);
-      this.discover.getPeopleCombinedCredits(id).subscribe(res => this.combinedCredits = res);
-    } else {
-      this.reviewService.getOne(itemType, id).subscribe(res => this.reviews = res);
-    }
+  fetchData(id: string) {
+    this.discover.getPeopleDetails(Number(id)).subscribe(res => this.peopleDetails = res);
+    this.discover.getPeopleCombinedCredits(id).subscribe(res => this.combinedCredits = res);
   }
 
   // Takes a date of birth and reformats it to DAY / MONTH / YEAR
@@ -80,6 +77,10 @@ export class ItemDetailsComponent implements OnInit {
   shortText = (str: string, length = 50) => {
     const strArr = str.split(' ');
     return strArr.length < length ? str : strArr.filter((word, i) => i < length).join(' ') + '...';
+  }
+
+  selectCast(cast: Cast[]): Cast[] {
+    return cast.filter((item, i) => i < 15);
   }
 
   handleFavoriteItem(target: EventTarget, itemId: string) {
