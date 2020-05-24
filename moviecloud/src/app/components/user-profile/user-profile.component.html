@@ -58,7 +58,7 @@
                     <div *ngIf="favoriteMovies.length > 0;else noMovies">
                         <a *ngFor="let movie of favoriteMovies" [routerLink]="['/details/movie', movie.id]">
                             <div class="user-profile-container-main-container-item-container">
-                              <img class="user-profile-container-main-container-item-container__image" src="{{ tmdb.secure_base_url }}{{ tmdb.poster_sizes[1] }}{{ movie.poster_path }}" alt="{{ movie.title }}"/>
+                              <img class="user-profile-container-main-container-item-container__image" src="{{ tmdb.secure_base_url + tmdb.poster_sizes[1] + movie.poster_path }}" alt="{{ movie.title }}"/>
                               <h4 class="user-profile-container-main-container-item-container__title">{{ movie.title }}</h4>
                               <p class="user-profile-container-main-container-item-container__genres">{{ handleGenres(movie.genre_ids, 'movie').name1 }}{{ handleGenres(movie.genre_ids, 'movie').name2 }}</p>
                             </div>
@@ -76,7 +76,7 @@
                       <div *ngIf="favoriteShows.length > 0;else noShows">
                         <a *ngFor="let show of favoriteShows" [routerLink]="['/details/tv', show.id]">
                           <div class="user-profile-container-main-container-item-container">
-                            <img class="user-profile-container-main-container-item-container__image" src="{{ tmdb.secure_base_url }}{{ tmdb.poster_sizes[1] }}{{ show.poster_path }}" alt="{{ show.name }}"/>
+                            <img class="user-profile-container-main-container-item-container__image" src="{{ tmdb.secure_base_url + tmdb.poster_sizes[1] + show.poster_path }}" alt="{{ show.name }}"/>
                             <h4 class="user-profile-container-main-container-item-container__title">{{ show.name }}</h4>
                             <p class="user-profile-container-main-container-item-container__genres">{{ handleGenres(show.genre_ids, 'tv').name1 }}{{ handleGenres(show.genre_ids, 'tv').name2 }}</p>
                           </div>
@@ -94,7 +94,7 @@
                       <div *ngIf="ratedMovies.length > 0;else noMoviesRated">
                           <a *ngFor="let movie of ratedMovies" [routerLink]="['/details/movie', movie.id]">
                               <div class="user-profile-container-main-container-item-container">
-                                <img class="user-profile-container-main-container-item-container__image" src="{{ tmdb.secure_base_url }}{{ tmdb.poster_sizes[1] }}{{ movie.poster_path }}" alt="{{ movie.title }}"/>
+                                <img class="user-profile-container-main-container-item-container__image" src="{{ tmdb.secure_base_url + tmdb.poster_sizes[1] + movie.poster_path }}" alt="{{ movie.title }}"/>
                                 <h4 class="user-profile-container-main-container-item-container__title">{{ movie.title }}</h4>
                                 <p class="user-profile-container-main-container-item-container__genres">{{ handleGenres(movie.genre_ids, 'movie').name1 }}{{ handleGenres(movie.genre_ids, 'movie').name2 }}</p>
                               </div>
@@ -112,7 +112,7 @@
                         <div *ngIf="ratedShows.length > 0;else noShowsRated">
                           <a *ngFor="let show of ratedShows" [routerLink]="['/details/tv', show.id]">
                             <div class="user-profile-container-main-container-item-container">
-                              <img class="user-profile-container-main-container-item-container__image" src="{{ tmdb.secure_base_url }}{{ tmdb.poster_sizes[1] }}{{ show.poster_path }}" alt="{{ show.name }}"/>
+                              <img class="user-profile-container-main-container-item-container__image" src="{{ tmdb.secure_base_url + tmdb.poster_sizes[1] + show.poster_path }}" alt="{{ show.name }}"/>
                               <h4 class="user-profile-container-main-container-item-container__title">{{ show.name }}</h4>
                               <p class="user-profile-container-main-container-item-container__genres">{{ handleGenres(show.genre_ids, 'tv').name1 }}{{ handleGenres(show.genre_ids, 'tv').name2 }}</p>
                             </div>

@@ -9,8 +9,7 @@
       </header>
 
       <div class="user-log-in-container-content">
-        <!--change url later-->
-        <a href="https://www.themoviedb.org/authenticate/{{ requestToken }}?redirect_to=http://localhost:4200/profile/approved">
+        <a href="https://www.themoviedb.org/authenticate/{{ requestToken }}?redirect_to=https://pedantic-feynman-28e359.netlify.app/profile/approved">
           <button class="user-log-in-container-content__button">Log In</button>
         </a>
           <button class="user-log-in-container-content__button" (click)="handleBrowseAsGuest()" [disabled]="loading">{{ loading ? 'Loading...' : 'Browse as Guest' }}</button>

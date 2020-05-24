@@ -6,7 +6,7 @@
       <div class="swiper-wrapper">
           <div *ngFor="let item of items" class="swiper-slide">
           <a [routerLink]="['/details', itemType.toLowerCase(), item.id]">
-              <img class="swiper-slide__image" src="{{ tmdb.secure_base_url }}{{ tmdb.poster_sizes[1] }}{{ item.poster_path }}" alt="{{ item.title }}" />
+              <img class="swiper-slide__image" src="{{ tmdb.secure_base_url + tmdb.poster_sizes[1] + item.poster_path }}" alt="{{ item.title }}" />
               <h3 class="swiper-slide__title">{{ item.title }}</h3>
               <p className="swiper-slide__genres">{{ handleGenres(item.genre_ids).name1 }}{{ handleGenres(item.genre_ids).name2 }}</p>
               <p class="swiper-slide-rating">
