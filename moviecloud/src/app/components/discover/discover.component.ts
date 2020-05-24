@@ -13,7 +13,7 @@ export class DiscoverComponent implements OnInit {
   page: number;
   requestOptions: DiscoverOptions;
   items: Movie[];
-  tmdb: object = tmdbConfig;
+  tmdb: any = tmdbConfig;
 
   constructor(private discover: DiscoverService) { 
     this.page = 1;

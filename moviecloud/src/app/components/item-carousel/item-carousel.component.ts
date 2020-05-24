@@ -17,7 +17,7 @@ export class ItemCarouselComponent {
   @Input() title: string;
 
   config: SwiperConfigInterface;
-  tmdb: object = tmdbConfig;
+  tmdb: any = tmdbConfig;
 
   constructor() { 
     this.config = {

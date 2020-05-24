@@ -29,7 +29,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   tvSubscription: Subscription;
   movieGenres: Genre[];
   tvGenres: Genre[];
-  tmdb: object = tmdbConfig;
+  tmdb: any = tmdbConfig;
 
   constructor(
     private router: Router,
