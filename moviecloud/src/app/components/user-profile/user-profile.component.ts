@@ -109,7 +109,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     });
   }
 
-  handleGenres(genreIds: number[], itemType: string): object {
+  handleGenres(genreIds: number[], itemType: string): any {
     const genreList = itemType == 'movie' ? this.movieGenres : this.tvGenres;
     if (genreList) {
       let genresArr = genreList.filter(genre => parseInt(genre.id, 10) == genreIds[0] || parseInt(genre.id, 10) == genreIds[1] ? genre.name : null);

@@ -43,7 +43,7 @@ export class ItemCarouselComponent {
     };
   }
 
-  handleGenres(genreIds: number[]): object {
+  handleGenres(genreIds: number[]): any {
     // Checks item's genre ids, compares them to genre list ids and returns genre names in an object
     if (this.genres) {
       let genresArr = this.genres.filter(genre => parseInt(genre.id, 10) == genreIds[0] || parseInt(genre.id, 10) == genreIds[1] ? genre.name : null);

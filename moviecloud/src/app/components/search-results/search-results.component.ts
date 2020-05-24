@@ -116,7 +116,7 @@ export class SearchResultsComponent implements OnInit, OnDestroy {
     this.handleSearch(this.searchTerm, this.page);
   }
 
-  handleGenres(itemType: string, genreIds: number[]): object {
+  handleGenres(itemType: string, genreIds: number[]): any {
     const genreList = itemType == 'movie' ? this.movieGenres : this.tvGenres;
     if (genreList) {
       let genresArr = genreList.filter(genre => parseInt(genre.id, 10) == genreIds[0] || parseInt(genre.id, 10) == genreIds[1] ? genre.name : null);
