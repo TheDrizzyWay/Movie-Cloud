@@ -83,11 +83,11 @@ export class ItemDetailsComponent implements OnInit {
     return cast.filter((item, i) => i < 15);
   }
 
-  handleFavoriteItem(target: EventTarget, itemId: string) {
+  handleFavoriteItem(target: EventTarget, itemId: number) {
     if(this.sessionData && this.sessionData.session_id) {
       const requestBody = {
         media_type: this.itemType,
-        media_id: itemId,
+        media_id: itemId.toString(),
         favorite: !(<SVGElement>target).closest('.item-details-header-info-container-content__favorite').classList.value.includes('--active')
       };
 

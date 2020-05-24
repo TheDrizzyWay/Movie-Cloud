@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
@@ -6,9 +5,6 @@ import { Resource } from '@app/models/Resource';
 import { environment } from '../../../environments/environment';
 
 
-@Injectable({
-  providedIn: 'root'
-})
 export class GenericService<T extends Resource> {
   apiKey: string;
   baseUrl: string;
